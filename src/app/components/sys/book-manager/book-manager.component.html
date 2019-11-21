@@ -1,0 +1,55 @@
+<div style="float: left;height: 100%;width: 200px">
+
+<p-tree [value]="filesTree1" [loading]="loading" [style]="{height: '100%',overflow: 'auto',width: '200px'}"></p-tree>
+</div>
+<div style="width: calc(100% - 200px);float: right;height: 100%">
+  <p-table
+    [value]="books"
+    [columns]="cols"
+    [rows]="10"
+    [(selection)]="selectedBook"
+    [paginator]="true"
+    [scrollable]="true"
+    [scrollHeight]="scrollHeight"
+  >
+    <ng-template pTemplate="caption">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-g-nopad">
+          <div class="ui-g-4 ui-g-nopad">
+            <button  style="float: left" type="button" pButton icon="fa fa-plus" (click)="queryBooks()" label="新增"></button>
+            <button  style="float: left;margin-left:10px " type="button" pButton icon="fa fa-edit" (click)="queryBooks()" label="编辑"></button>
+            <button  style="float: left;margin-left:10px " type="button" pButton icon="fa fa-close" (click)="queryBooks()" label="删除"></button>
+          </div>
+          <div class="ui-g-8 ui-g-nopad">
+            <label for="bookName">书名：</label>
+            <input id="bookName" type="text" [(ngModel)]="param.bookName" name="bookName" pInputText>
+            <label for="bookAuthor">作者：</label>
+            <input id="bookAuthor" type="text" pInputText [(ngModel)]="param.bookAuthor" name="bookAuthor" >
+            <button  style="float: right" type="button" pButton icon="fa fa-search" (click)="queryBooks()" label="查询"></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 70px">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+
+        <th *ngFor="let col of columns" title="{{col.header}}">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+      <tr [pSelectableRow]="rowData">
+        <td style="width: 70px;text-align: center" >
+          <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+        </td>
+        <td *ngFor="let col of columns" title="{{rowData[col.field]}}">
+          {{rowData[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

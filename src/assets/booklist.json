@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "bookName": "a",
+      "id": "1",
+      "bookCateId": "1",
+      "bookPublish": "2019-11-11",
+      "bookAuthor": "Tomcat1"
+    },
+    {
+      "bookName": "b",
+      "id": "2",
+      "bookCateId": "2",
+      "bookPublish": "2019-11-12",
+      "bookAuthor": "Tomcat2"
+    },
+    {
+      "bookName": "c",
+      "id": "3",
+      "bookCateId": "3",
+      "bookPublish": "2019-11-13",
+      "bookAuthor": "Tomcat3"
+    },
+    {
+      "bookName": "d",
+      "id": "4",
+      "bookCateId": "4",
+      "bookPublish": "2019-11-14",
+      "bookAuthor": "Tomcat4"
+    }
+  ]
+}

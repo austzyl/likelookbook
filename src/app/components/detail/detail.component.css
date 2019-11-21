@@ -1,0 +1,39 @@
+body {
+  overflow: hidden;
+}
+.detail-content {
+  /*height: 100%;*/
+  line-height: 1.8;
+  position: relative;
+  transform: translateY(-50%);
+  top: 50%;
+  -webkit-box-shadow: 14px 19px 15px rgba(150, 132, 91, 0.45);
+  box-shadow: 14px 19px 15px rgba(150, 132, 91, 0.45);
+}
+.detail-left-right {
+  height: 100%;
+  background-color: aliceblue;
+  overflow: hidden;
+  padding: 40px;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+  cursor: pointer;
+}
+.detail-left {
+  border-right: 2px solid rosybrown;
+}
+.detail-right {
+  border-left: 2px solid rosybrown;
+}
+.detail-right:focus {
+
+  -webkit-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+
+}
+.detail-pagecontent {
+  height: 100%;
+  overflow: hidden;
+  white-space: pre-line;
+  font-size: 18px;
+}

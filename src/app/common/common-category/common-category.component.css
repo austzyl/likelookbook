@@ -1,0 +1,16 @@
+.book-category {
+  border-bottom: 1px solid #F9F7F7;
+  width: 70px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 14px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+.book-home-panel {
+  border-left: 5px solid #211d1d;
+  padding: 0 0 0 14px;
+  font-size: larger;
+  font-weight: bold;
+}
+

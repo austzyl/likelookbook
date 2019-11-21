@@ -1,0 +1,173 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+  height: 100%;
+}
+
+body {
+  /*background: url(assets/img/bg.jpg) no-repeat;*/
+  padding: 0;
+  height: 100%;
+  font-size: 14px;
+  margin: 0px auto auto auto;
+  color: #000000;
+  display: block;
+}
+
+* {
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0px;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 0px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+}
+
+.header {
+  height: 181px;
+  background: url(assets/img/header.jpg) no-repeat;
+}
+.height100 {
+  height: 100%;
+}
+.height50 {
+   height: 50%;
+}
+.height33 {
+  height: 33.33333%;
+}
+.ui-g {
+  width: 100%;
+}
+
+
+.box-stretched {
+  height: 100%;
+}
+
+.sample-layout {
+  margin: 0;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.ui-g-bottom {
+  border-bottom: 1px solid #e2d9958c;
+}
+
+.vertical-container {
+  margin: 0;
+  height: 200px;
+  background: #efefef;
+  border-radius: 4px;
+}
+
+.nested-grid .p-col-4 {
+  padding-bottom: 1em;
+}
+
+.custom-bottom {
+  position: relative;
+  bottom: 10px;
+  top: 100px;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: burlywood !important;
+}
+
+.box, .sample-layout > div {
+  background-color: #fbf7f2;
+}
+
+body .ui-menubar {
+  background-color: #968a7a47 !important;
+  padding: 0;
+  position: relative;
+  top: 153px;
+  height: 28px;
+  border: none !important;
+}
+
+body .ui-menubar .ui-menubar-root-list > .ui-menuitem > .ui-menuitem-link {
+  padding: 4px 22px !important;
+}
+
+body .ui-panel .ui-panel-titlebar {
+  border: 0px !important;
+  background-color: #e7e7e7 !important;
+  text-align: center !important;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.sample-layout .ui-panel .ui-panel-content {
+  border: 0px !important;
+  background-color: #fff !important;
+  height: 215px !important;
+  -webkit-box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom_inline_block {
+  display: inline-block;
+}
+
+.custom_margin_0 {
+  margin: 0px !important;
+}
+
+.custom-label-parent .ui-menubar .ui-menubar-root-list {
+  margin-left: -140px !important;
+}
+
+.custom-label-parent .ui-menuitem-text {
+  color: #fff !important;
+}
+
+.custom-label-parent .ui-menuitem-link:hover {
+  background-color: #a5919154 !important;
+  height: 28px;
+}
+body .ui-table .ui-table-tbody > tr > td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.closePop {
+  width: 18px;
+  float: right;
+  height: 18px;
+  padding-right: 28px;
+  background: url('assets/img/close.png') no-repeat 10px center;
+  cursor: pointer;
+}
+.closePop:hover {
+  background: url('assets/img/closehover.png') no-repeat 10px center;
+
+}
+.script_title {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+.width70 {
+  width: 70%;
+}
+.label-form {
+  text-align: right;
+  padding-top: 15px !important;
+  height: 45px;
+}

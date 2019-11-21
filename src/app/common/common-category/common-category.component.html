@@ -1,0 +1,35 @@
+<div class="ui-g sample-layout">
+  <div class="ui-g-12" style="border-bottom: 2px solid #dddddd">
+    <div class="ui-g-9 book-home-panel" >{{item.categoryTitle}}</div>
+    <div class="ui-g-3 text-align-right" (click)="more(item.categoryId)">>>更多</div>
+  </div>
+  <div class="ui-g-12">
+    <div class="ui-g-9">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-g-nopad">
+          <div class="ui-g-3" style="text-align: center;padding: 5px 15px">
+            <img src="../../../assets/img/bookface/{{item.mainBookImg}}" alt="" width="80%" style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1)">
+            <div style="text-align: center;font-size: larger;margin-top: 30px;">{{item.mainBookName}}</div>
+            <div style="text-align: center;font-size: large;margin-top: 15px">查看详情</div>
+          </div>
+          <div class="ui-g-9 height100">
+            <div class="ui-g height100">
+              <div class="ui-g-6 ui-g-nopad height33" style="border-bottom: 1px solid #dae8ef" *ngFor="let childItem of item.otherBooks">
+                <div>{{childItem.bookName}}</div>
+                  <div>{{childItem.bookId}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-3">
+      <div class="ui-g ui-g-nopad">
+        <div class="ui-g-12" style="text-align: center;font-size: larger;font-weight: bold;background-color: #eee;">排行榜</div>
+        <div class="ui-g-12" *ngFor="let hot of item.ranking" style="text-align: center">
+          <div class="ui-g-12">{{hot.bookName}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

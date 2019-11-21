@@ -1,0 +1,30 @@
+<div class="ui-g" style="height: 100%" id="bookcontent" *ngIf="isPageModel">
+  <div class="ui-g-12 detail-content">
+    <div class="ui-g-6 detail-left detail-left-right" (click)="changePage('0')">
+      <pre class="detail-pagecontent">
+        {{prePageContent}}
+      </pre>
+      <div class="ui-g-12 ui-g-nopad"  style="text-align: center">
+       {{params.currentPage}}
+      </div>
+    </div>
+    <div class="ui-g-6 detail-right detail-left-right" (click)="changePage('1')">
+      <pre class="detail-pagecontent">
+        {{nextPageContent}}
+      </pre>
+      <div class="ui-g-12 ui-g-nopad"  style="text-align: center">
+        {{params.currentPage + 1}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui-g" style="height: 100%;"  *ngIf="!isPageModel">
+  <div class="ui-g-12" style="font-size: 28px;line-height: 1.8;background-color: cornflowerblue;height: 1200px;margin-bottom: 30px;margin-top: 30px">
+     <pre class="detail-pagecontent">{{nextPageContent}}</pre>
+  </div>
+</div>
+<div class="ui-g" style="position:fixed;width: 100px;top: 8px;right: 8px">
+  <div class="ui-g-12 ui-g-nopad" style="height: 40px;background-color: #5a554e8c;text-align: center;padding: 6px;cursor: pointer" (click)="fullscreen()"><h2>全屏</h2></div>
+  <div class="ui-g-12 ui-g-nopad" style="height: 40px;background-color: #a7b0b5c4;text-align: center;padding: 6px;cursor: pointer;" (click)="isPageModel = !isPageModel"><h2>反馈</h2></div>
+  <div class="ui-g-12 ui-g-nopad" style="height: 40px;background-color: #c4d0c9c4;text-align: center;padding: 6px;cursor:pointer;"><h2>收藏</h2></div>
+</div>

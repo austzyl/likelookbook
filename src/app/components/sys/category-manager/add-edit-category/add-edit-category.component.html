@@ -1,0 +1,50 @@
+<div style="  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 1200px;
+  padding: 20px;background-color: #efe6d9">
+  <div class="ui-g">
+    <div class="ui-g-12" style="    border-bottom: 1px solid #eeeeee;padding-bottom: 14px !important;">
+      <div class="ui-g-6 script_title" style="padding: 0px">{{addOrEditTitle}}</div>
+      <div class="ui-g-6" style="padding: 0px">
+        <div class="closePop" (click)="closeAddOrEditDialog()"></div>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-12"></div>
+    <div class="ui-g-12"></div>
+    <div class="ui-g-12"></div>
+    <div class="ui-g-12"></div>
+    <div class="ui-g-12">
+      <div class="ui-g-4 label-form">
+        <label for="">分类名称</label>
+      </div>
+      <div class="ui-g-8">
+        <input class="width70" type="text" [(ngModel)]="category.cateName" name="cateName" id="cateName" pInputText>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4 label-form">
+        <label for="">分类编码</label>
+      </div>
+      <div class="ui-g-8" >
+        <input class="width70" type="text" [(ngModel)]="category.cateCode" name="cateCode" id="cateCode" pInputText>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4 label-form">
+        <label for="">分类目录</label>
+      </div>
+      <div class="ui-g-8">
+        <input class="width70" type="text" [(ngModel)]="category.cateDir" name="cateDir" id="cateDir" pInputText>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g" style="    position: absolute;bottom: 0px;">
+        <div class="ui-g-12">
+      <button  style="float: right;margin-right:50px " type="button" pButton icon="fa fa-save" (click)="save()" label="保存"></button>
+
+    </div>
+  </div>
+</div>

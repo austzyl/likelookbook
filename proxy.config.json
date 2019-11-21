@@ -1,0 +1,8 @@
+{
+  "/":{
+    "target":"http://localhost/yunqi",
+    "secure":false,
+    "logLevel":"debug",
+    "changeOrigin":true
+  }
+}

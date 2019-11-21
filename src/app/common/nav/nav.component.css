@@ -1,0 +1,25 @@
+.custom-label-parent {
+  display: inline-block;
+  width: 100%;
+}
+.custom-label-child {
+  width: 160px;
+  font-family: cursive;
+  font-size: 20px;
+  padding: 10px;
+  color: rebeccapurple;
+  float: left;
+  position: relative;
+  top: 50px;
+  left: 210px;
+}
+.custom-label-child > a {
+  color: #228e39;
+  font-weight: bold;
+}
+.custom-button {
+  cursor: pointer;
+  margin-right: 1.25em;
+  color: #FFFFFF;
+}
+

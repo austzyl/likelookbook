@@ -1,0 +1,54 @@
+<div style="width: calc(100%);float: right;height: 100%">
+  <p-table
+    [value]="categories"
+    [columns]="cols"
+    [rows]="15"
+    [(selection)]="selectedCategories"
+    [paginator]="true"
+    [scrollable]="true"
+    [scrollHeight]="scrollHeight"
+  >
+    <ng-template pTemplate="caption">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-g-nopad">
+          <div class="ui-g-4 ui-g-nopad">
+            <button  style="float: left" type="button" pButton icon="fa fa-plus" (click)="addOrEditCategory(null)" label="新增"></button>
+            <button  style="float: left;margin-left:10px " type="button" pButton icon="fa fa-edit" (click)="addOrEditCategory(selectedCategories)" label="编辑"></button>
+            <button  style="float: left;margin-left:10px " type="button" pButton icon="fa fa-close" (click)="deleteCategories()" label="删除"></button>
+          </div>
+          <div class="ui-g-8 ui-g-nopad">
+            <label for="">分类：</label>
+            <input type="text" [(ngModel)]="param.cateName" pInputText>
+            <label for="">编码：</label>
+            <input type="text" [(ngModel)]="param.cateCode" pInputText>
+            <button  style="float: right" type="button" pButton icon="fa fa-search" (click)="queryCategories()" label="查询"></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 70px">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+
+        <th *ngFor="let col of columns" title="{{col.header}}">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+      <tr [pSelectableRow]="rowData">
+        <td style="width: 70px;text-align: center" >
+          <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+        </td>
+        <td *ngFor="let col of columns" title="{{rowData[col.field]}}">
+          {{rowData[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<div *ngIf="showAddOrEditDialog" >
+  <app-add-edit-category [category]="selectedCategories[0]" (closeEmitter) = "closeListener($event)"></app-add-edit-category>
+</div>

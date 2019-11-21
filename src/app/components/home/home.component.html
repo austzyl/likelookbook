@@ -1,0 +1,105 @@
+<div class="header">
+  <app-nav></app-nav>
+</div>
+
+<div class="sample-layout coustom-home">
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="ui-g-3">
+        <p-panel>
+          <p-header style=" text-align: center">
+            图书分类
+          </p-header>
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <div class="ui-g-4">
+                <div class="book-category">
+                  编程
+                </div>
+
+              </div>
+              <div class="ui-g-4">
+                <div class="book-category">
+                  设计
+                </div>
+              </div>
+              <div class="ui-g-4">
+
+                <div class="book-category">
+                  工具
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-12">
+              <div class="ui-g-4">
+                <div class="book-category">
+                  数据
+                </div>
+
+              </div>
+              <div class="ui-g-4">
+                <div class="book-category">
+                  创新
+                </div>
+              </div>
+              <div class="ui-g-4">
+
+                <div class="book-category">
+                  检测
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-12">
+              <div class="ui-g-4">
+                <div class="book-category">
+                  初级
+                </div>
+
+              </div>
+              <div class="ui-g-4">
+                <div class="book-category">
+                  中级
+                </div>
+              </div>
+              <div class="ui-g-4">
+
+                <div class="book-category">
+                  高级
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-panel>
+      </div>
+      <div class="ui-g-6">
+        <p-galleria [images]="images" (onImageClicked)="clickImage($event)" (onImageChange)="imageChanged($event)"
+                    panelWidth="auto" panelHeight="200" showCaption="true"></p-galleria>
+      </div>
+      <div class="ui-g-3">
+        <p-panel>
+          <p-header>
+            强烈推荐
+          </p-header>
+          <div class="ui-g">
+            <div class="ui-g-12" style="border-bottom: 1px solid #dddddd;"><a [routerLink]="['/detail',bookid]">1&nbsp;&nbsp;Java从入门到精通</a></div>
+            <div class="ui-g-12" style="border-bottom: 1px solid #dddddd;">2&nbsp;&nbsp;数据结构与算法分析</div>
+            <div class="ui-g-12" style="border-bottom: 1px solid #dddddd;">3&nbsp;&nbsp;Python你不知道的秘密</div>
+            <div class="ui-g-12" style="border-bottom: 1px solid #dddddd;">4&nbsp;&nbsp;Angular下一代开发应用</div>
+            <div class="ui-g-12" style="border-bottom: 1px solid #dddddd;">5&nbsp;&nbsp;Redis实战</div>
+            <div class="ui-g-12" style="\text-align: right">更多</div>
+
+          </div>
+        </p-panel>
+        <!--
+                  <app-history [title]="oTitle" [content]="oContent"></app-history>
+        -->
+      </div>
+
+    </div>
+  </div>
+  <div *ngFor="let item of items">
+    <app-common-category [item]="item" ></app-common-category>
+  </div>
+
+</div>
