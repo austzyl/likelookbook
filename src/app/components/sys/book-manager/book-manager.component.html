@@ -1,6 +1,13 @@
 <div style="float: left;height: 100%;width: 200px">
 
-<p-tree [value]="filesTree1" [loading]="loading" [style]="{height: '100%',overflow: 'auto',width: '200px'}"></p-tree>
+<p-tree
+  [value]="filesTree1"
+  [loading]="loading"
+  [style]="{height: '100%',overflow: 'auto',width: '200px'}"
+  selectionMode="single"
+  [(selection)]="selectedTree"
+  (onNodeSelect)="nodeSelect($event)"
+></p-tree>
 </div>
 <div style="width: calc(100% - 200px);float: right;height: 100%">
   <p-table

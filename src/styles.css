@@ -12,7 +12,12 @@ body {
   color: #000000;
   display: block;
 }
-
+div:focus {
+  outline: none;
+}
+.ui-treenode-content-selected {
+  background-color: #007ad9;
+}
 * {
   -webkit-margin-before: 0px;
   -webkit-margin-after: 0px;

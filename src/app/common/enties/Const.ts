@@ -4,7 +4,7 @@
 export const BOOK_COLS = [
   {header: '书名', field: 'bookName'},
   {header: '作者', field: 'bookAuthor'},
-  {header: '出版时间', field: 'formatBookPublish'},
+  {header: '出版时间', field: 'bookPublish'},
   {header: '字数', field: 'bookTotalCh'},
   {header: '总页数', field: 'bookTotalPage'},
   {header: '类别', field: 'cateName'}

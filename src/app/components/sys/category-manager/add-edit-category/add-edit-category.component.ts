@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Category} from '../../../../common/enties/Category';
 import {CategoryService} from '../../../../common/services/category.service';
-import {falseIfMissing} from "protractor/built/util";
 
 @Component({
   selector: 'app-add-edit-category',

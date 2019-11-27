@@ -5,7 +5,7 @@ export interface BookItem {
   id?: string;
   bookName?: string;
   bookAuthor?: string;
-  formatBookPublish?: string;
+  bookPublish?: string;
   bookTotalCh?: string;
   bookTotalPage?: string;
   bookCateId?: string;

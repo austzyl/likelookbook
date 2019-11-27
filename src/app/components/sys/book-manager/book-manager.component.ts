@@ -3,6 +3,7 @@ import {TreeNode} from 'primeng/api';
 import {BookService} from '../../../common/services/book.service';
 import {BookItem} from '../../../common/enties/BookItem';
 import {BOOK_COLS} from '../../../common/enties/Const';
+import {CategoryService} from '../../../common/services/category.service';
 
 @Component({
   selector: 'app-book-manager',
@@ -16,83 +17,23 @@ export class BookManagerComponent implements OnInit, AfterViewInit  {
   scrollHeight = '0px';
   books: BookItem[] = [];
   selectedBook: BookItem;
+  selectedTree: TreeNode;
   param = {
     page: 0,
     size: 10,
     bookName: '',
-    bookAuthor: ''
+    bookAuthor: '',
+    cateCode: ''
   };
   constructor(private bookService: BookService,
+              private categoryService: CategoryService,
               private el: ElementRef,
               private renderer2: Renderer2) {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.filesTree1 = [
-        {
-          'label': 'Documents',
-          'data': 'Documents Folder',
-          'expandedIcon': 'fa fa-folder-open',
-          'collapsedIcon': 'fa fa-folder',
-          'children': [{
-            'label': 'Work',
-            'data': 'Work Folder',
-            'expandedIcon': 'fa fa-folder-open',
-            'collapsedIcon': 'fa fa-folder',
-            'children': [{
-              'label': 'Expenses.doc',
-              'icon': 'fa fa-file-word-o',
-              'data': 'Expenses Document'
-            }, {'label': 'Resume.doc', 'icon': 'fa fa-file-word-o', 'data': 'Resume Document'}]
-          },
-            {
-              'label': 'Home',
-              'data': 'Home Folder',
-              'expandedIcon': 'fa fa-folder-open',
-              'collapsedIcon': 'fa fa-folder',
-              'children': [{'label': 'Invoices.txt', 'icon': 'fa fa-file-word-o', 'data': 'Invoices for this month'}]
-            }]
-        },
-        {
-          'label': 'Pictures',
-          'data': 'Pictures Folder',
-          'expandedIcon': 'fa fa-folder-open',
-          'collapsedIcon': 'fa fa-folder',
-          'children': [
-            {'label': 'barcelona.jpg', 'icon': 'fa fa-file-image-o', 'data': 'Barcelona Photo'},
-            {'label': 'logo.jpg', 'icon': 'fa fa-file-image-o', 'data': 'PrimeFaces Logo'},
-            {'label': 'primeui.png', 'icon': 'fa fa-file-image-o', 'data': 'PrimeUI Logo'}]
-        },
-        {
-          'label': 'Movies',
-          'data': 'Movies Folder',
-          'expandedIcon': 'fa fa-folder-open',
-          'collapsedIcon': 'fa fa-folder',
-          'children': [{
-            'label': 'Al Pacino',
-            'data': 'Pacino Movies',
-            'children': [{
-              'label': 'Scarface',
-              'icon': 'fa fa-file-video-o',
-              'data': 'Scarface Movie'
-            }, {'label': 'Serpico', 'icon': 'fa fa-file-video-o', 'data': 'Serpico Movie'}]
-          },
-            {
-              'label': 'Robert De Niro',
-              'data': 'De Niro Movies',
-              'children': [{
-                'label': 'Goodfellas',
-                'icon': 'fa fa-file-video-o',
-                'data': 'Goodfellas Movie'
-              }, {'label': 'Untouchables', 'icon': 'fa fa-file-video-o', 'data': 'Untouchables Movie'}]
-            }]
-        }
-      ];
-      this.loading = false;
-    }, 1000);
-
     this.queryBooks();
+    this.getTree();
   }
 
   queryBooks() {
@@ -102,6 +43,21 @@ export class BookManagerComponent implements OnInit, AfterViewInit  {
       console.log('data', data);
       this.books = data['data'];
     });
+  }
+  getTree() {
+    this.loading = true;
+    this.categoryService.categoryTree('0').subscribe(data => {
+      this.loading = false;
+      if (data['success'] === 'true') {
+        this.filesTree1 = data['data'];
+      }
+    });
+  }
+  nodeSelect(node) {
+    console.log('node:', node);
+    node.node.expanded = !node.node.expanded;
+    this.param.cateCode = node.node.type;
+    this.queryBooks();
   }
   ngAfterViewInit() {
     // 修改表格高度撑开页面

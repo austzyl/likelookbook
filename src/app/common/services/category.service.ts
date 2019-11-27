@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {instantiateDefaultStyleNormalizer} from "@angular/platform-browser/animations/src/providers";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class CategoryService {
 
   queryCategoryById(id) {
     const url = '/category/' + id;
-    return this.http.get(url, null);
+    return this.http.get(url, {params: {}});
   }
 
   save(category) {
@@ -26,7 +25,11 @@ export class CategoryService {
   }
 
   delete(ids) {
-    const url = 'category/del';
+    const url = '/category/del';
     return this.http.post(url, ids);
+  }
+  categoryTree(pid) {
+    const url = '/category/tree/' + pid;
+    return this.http.get(url, {params: {}});
   }
 }

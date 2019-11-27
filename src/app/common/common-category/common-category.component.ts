@@ -15,7 +15,7 @@ export class CommonCategoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  more() {
+  more(id) {
     console.log('more book');
   }
 }
