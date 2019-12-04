@@ -6,4 +6,6 @@ export interface Category {
   cateName?: string;
   cateCode?: string;
   cateDir?: string;
+  cateOrder?: string;
+  cateParentId?: string;
 }

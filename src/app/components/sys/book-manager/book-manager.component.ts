@@ -11,12 +11,12 @@ import {CategoryService} from '../../../common/services/category.service';
   styleUrls: ['./book-manager.component.css']
 })
 export class BookManagerComponent implements OnInit, AfterViewInit  {
-  filesTree1: TreeNode[] = [];
+  cateTree: TreeNode[] = [];
   loading = true;
   cols = BOOK_COLS;
   scrollHeight = '0px';
   books: BookItem[] = [];
-  selectedBook: BookItem;
+  selectedBook: BookItem[] = [];
   selectedTree: TreeNode;
   param = {
     page: 0,
@@ -25,6 +25,8 @@ export class BookManagerComponent implements OnInit, AfterViewInit  {
     bookAuthor: '',
     cateCode: ''
   };
+  showAddEdit = false;
+  editItem: BookItem = null;
   constructor(private bookService: BookService,
               private categoryService: CategoryService,
               private el: ElementRef,
@@ -45,11 +47,17 @@ export class BookManagerComponent implements OnInit, AfterViewInit  {
     });
   }
   getTree() {
+    if (sessionStorage.getItem('cateTree')) {
+      this.cateTree = JSON.parse(sessionStorage.getItem('cateTree'));
+      this.loading = false;
+      return;
+    }
     this.loading = true;
     this.categoryService.categoryTree('0').subscribe(data => {
       this.loading = false;
       if (data['success'] === 'true') {
-        this.filesTree1 = data['data'];
+        this.cateTree = data['data'];
+        sessionStorage.setItem('cateTree', JSON.stringify(this.cateTree));
       }
     });
   }
@@ -58,6 +66,26 @@ export class BookManagerComponent implements OnInit, AfterViewInit  {
     node.node.expanded = !node.node.expanded;
     this.param.cateCode = node.node.type;
     this.queryBooks();
+  }
+  doShowAddEdit(item) {
+    if (item && this.selectedBook.length !== 1) {
+      alert('只能选择一条数据');
+      return;
+    }
+    if (item !== null) {
+      this.editItem = item[0];
+    } else {
+      this.editItem = null;
+    }
+    this.showAddEdit = true;
+  }
+  doCloseAddEdit(event) {
+    this.selectedBook = [];
+    this.showAddEdit = false;
+    this.editItem = null;
+    if (event.save) {
+      this.queryBooks();
+    }
   }
   ngAfterViewInit() {
     // 修改表格高度撑开页面

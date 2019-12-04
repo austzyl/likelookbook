@@ -16,4 +16,9 @@ export class BookService {
     const url = '/book/list';
     return this.http.get(url, {params: params});
   }
+
+  save(item) {
+    const url = '/book';
+    return this.http.post(url, item);
+  }
 }

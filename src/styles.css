@@ -12,12 +12,15 @@ body {
   color: #000000;
   display: block;
 }
+
 div:focus {
   outline: none;
 }
+
 .ui-treenode-content-selected {
   background-color: #007ad9;
 }
+
 * {
   -webkit-margin-before: 0px;
   -webkit-margin-after: 0px;
@@ -34,15 +37,19 @@ div:focus {
   height: 181px;
   background: url(assets/img/header.jpg) no-repeat;
 }
+
 .height100 {
   height: 100%;
 }
+
 .height50 {
-   height: 50%;
+  height: 50%;
 }
+
 .height33 {
   height: 33.33333%;
 }
+
 .ui-g {
   width: 100%;
 }
@@ -146,11 +153,13 @@ body .ui-panel .ui-panel-titlebar {
   background-color: #a5919154 !important;
   height: 28px;
 }
+
 body .ui-table .ui-table-tbody > tr > td {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .closePop {
   width: 18px;
   float: right;
@@ -159,20 +168,33 @@ body .ui-table .ui-table-tbody > tr > td {
   background: url('assets/img/close.png') no-repeat 10px center;
   cursor: pointer;
 }
+
 .closePop:hover {
   background: url('assets/img/closehover.png') no-repeat 10px center;
 
 }
+
 .script_title {
   font-size: 14px;
   color: #333;
   font-weight: bold;
 }
+
 .width70 {
-  width: 70%;
+  width: 70% !important;
 }
+
 .label-form {
   text-align: right;
   padding-top: 15px !important;
   height: 45px;
+}
+
+.add-edit-page {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 1200px;
+  padding: 20px;
+  background-color: #efe6d9;
 }

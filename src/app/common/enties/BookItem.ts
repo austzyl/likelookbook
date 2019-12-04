@@ -1,13 +1,38 @@
 /**
  * Created by yaleizhu on 2019/11/13.
  */
-export interface BookItem {
+export class BookItem {
   id?: string;
   bookName?: string;
   bookAuthor?: string;
   bookPublish?: string;
   bookTotalCh?: string;
   bookTotalPage?: string;
-  bookCateId?: string;
+  cateId?: string;
   cateName?: string;
+
+  constructor(
+    id: string,
+    bookName: string,
+    bookAuthor: string,
+    bookPublish: string,
+    bookTotalCh: string,
+    bookTotalPage: string,
+    cateId: string,
+    cateName: string
+  ) {
+    this.id = id;
+    this.bookName = bookName;
+    this.bookAuthor = bookAuthor;
+    this.bookPublish = bookPublish;
+    this.bookTotalCh = bookTotalCh;
+    this.bookTotalPage = bookTotalPage;
+    this.cateId = cateId;
+    this.cateName = cateName;
+  }
+
+  static newInstance(): any {
+    return new BookItem('', '', '', '', '', '', '', '');
+  }
 }
+

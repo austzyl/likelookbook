@@ -10,9 +10,10 @@ import {BookService} from '../../common/services/book.service';
 export class DetailComponent implements OnInit {
 
   params = {
-    currentPage: 1,
+    currentPage: 0,
     flag: '1',
-    filePath: ''
+    filePath: '',
+    bytesCount: '512'
   };
 
   prePageContent = '';

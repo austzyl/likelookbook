@@ -15,21 +15,43 @@ export class AddEditCategoryComponent implements OnInit {
 
   @Input()
   category: Category;
+
+  @Input()
+  isAdd;
+
+  editCategory: Category;
+  cateCodes = [
+    {
+      label: 'Level One',
+      value: 1
+    },
+    {
+      label: 'Level Two',
+      value: 2
+    },
+    {
+      label: 'Level Three',
+      value: 3
+    }
+  ];
   eventData = {
     save: false,
-    colse: true
+    close: true
   };
   constructor(private categoryService: CategoryService) { }
 
 
   ngOnInit() {
-    if (!this.category) {
-        this.category = {
+    if (this.isAdd) {
+        this.editCategory = {
           id: '',
           cateName: '',
           cateCode: '',
           cateDir: ''
         };
+    } else {
+      this.addOrEditTitle = '编辑';
+      this.editCategory = this.category;
     }
     console.log('category:', this.category);
   }
@@ -39,7 +61,7 @@ export class AddEditCategoryComponent implements OnInit {
   }
 
   save() {
-    this.categoryService.save(this.category).subscribe((data) => {
+    this.categoryService.save(this.editCategory, this.category.id).subscribe((data) => {
       console.log('data', data);
       if (data['success'] === 'true') {
         this.eventData.save = true;

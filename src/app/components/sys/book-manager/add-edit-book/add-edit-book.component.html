@@ -16,42 +16,37 @@
       <div class="ui-g-4 label-form">
         <label for="">分类名称</label>
       </div>
-      <div class="ui-g-8" >
-        <input  class="width70" type="text" [(ngModel)]="editCategory.cateName" name="cateCode" id="cateName" pInputText>
+      <div class="ui-g-8">
+        <input class="width70" type="text" [(ngModel)]="bookItem.bookName" name="cateName" id="cateName" pInputText>
       </div>
     </div>
-    <div class="ui-g-12" *ngIf="!isAdd" >
+    <div class="ui-g-12">
       <div class="ui-g-4 label-form">
         <label for="">分类编码</label>
       </div>
       <div class="ui-g-8" >
-<!--
-        <p-dropdown styleClass="width70" [options]="cateCodes" [(ngModel)]="editCategory.cateCode"></p-dropdown>
--->
-        <input class="width70" readonly type="text" [(ngModel)]="editCategory.cateCode" name="cateDir" id="cateCode" pInputText >
-
+        <input class="width70" type="text" [(ngModel)]="bookItem.bookAuthor" name="cateCode" id="cateCode" pInputText>
       </div>
     </div>
-    <div class="ui-g-12" *ngIf="!isAdd" >
+    <div class="ui-g-12">
       <div class="ui-g-4 label-form">
         <label for="">分类目录</label>
       </div>
       <div class="ui-g-8">
-        <input class="width70" readonly type="text" [(ngModel)]="editCategory.cateDir" name="cateDir" id="cateDir" pInputText>
+        <input class="width70" type="text" [(ngModel)]="bookItem.bookPublish" name="cateDir" id="cateDir" pInputText>
       </div>
     </div>
-    <!--<div class="ui-g-12">
+    <div class="ui-g-12">
       <div class="ui-g-4 label-form">
-        <label for="cateParentId">父级分类</label>
+        <label for="">分类id</label>
       </div>
       <div class="ui-g-8">
-        <input class="width70" type="text" [(ngModel)]="category.cateParentId" name="cateName" id="cateParentId" pInputText>
+        <input class="width70" type="text" [(ngModel)]="bookItem.cateId" name="cateDir" id="cateDir" pInputText>
       </div>
-    </div>-->
-
+    </div>
   </div>
   <div class="ui-g" style="    position: absolute;bottom: 0px;">
-        <div class="ui-g-12">
+    <div class="ui-g-12">
       <button  style="float: right;margin-right:50px " type="button" pButton icon="fa fa-save" (click)="save()" label="保存"></button>
 
     </div>

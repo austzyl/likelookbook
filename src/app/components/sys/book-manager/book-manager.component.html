@@ -1,7 +1,7 @@
 <div style="float: left;height: 100%;width: 200px">
 
 <p-tree
-  [value]="filesTree1"
+  [value]="cateTree"
   [loading]="loading"
   [style]="{height: '100%',overflow: 'auto',width: '200px'}"
   selectionMode="single"
@@ -23,8 +23,8 @@
       <div class="ui-g">
         <div class="ui-g-12 ui-g-nopad">
           <div class="ui-g-4 ui-g-nopad">
-            <button  style="float: left" type="button" pButton icon="fa fa-plus" (click)="queryBooks()" label="新增"></button>
-            <button  style="float: left;margin-left:10px " type="button" pButton icon="fa fa-edit" (click)="queryBooks()" label="编辑"></button>
+            <button  style="float: left" type="button" pButton icon="fa fa-plus" (click)="doShowAddEdit(null)" label="新增"></button>
+            <button  style="float: left;margin-left:10px " type="button" pButton icon="fa fa-edit" (click)="doShowAddEdit(selectedBook)" label="编辑"></button>
             <button  style="float: left;margin-left:10px " type="button" pButton icon="fa fa-close" (click)="queryBooks()" label="删除"></button>
           </div>
           <div class="ui-g-8 ui-g-nopad">
@@ -59,4 +59,7 @@
       </tr>
     </ng-template>
   </p-table>
+</div>
+<div *ngIf="showAddEdit">
+  <app-add-edit-book [bookItem]="editItem" (closeEmitter)="doCloseAddEdit($event)"></app-add-edit-book>
 </div>

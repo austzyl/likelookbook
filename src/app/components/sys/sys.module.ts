@@ -10,8 +10,9 @@ import {TreeModule} from 'primeng/tree';
 import {ToastModule} from 'primeng/toast';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
-import {InputTextModule} from 'primeng/primeng';
-import { AddEditCategoryComponent } from './category-manager/add-edit-category/add-edit-category.component';
+import {ContextMenuModule, DropdownModule, InputTextModule, TreeTableModule} from 'primeng/primeng';
+import {AddEditCategoryComponent} from './category-manager/add-edit-category/add-edit-category.component';
+import {AddEditBookComponent} from './book-manager/add-edit-book/add-edit-book.component';
 
 
 export const ROUTES = [
@@ -41,6 +42,7 @@ export const ROUTES = [
     // canActivate: [AuthenticatedGuard]
   }
 ];
+
 @NgModule({
   imports: [
     CommonModule,
@@ -50,8 +52,18 @@ export const ROUTES = [
     InputTextModule,
     ButtonModule,
     TableModule,
+    DropdownModule,
+    TreeTableModule,
+    ContextMenuModule,
     RouterModule.forChild(ROUTES)
   ],
-  declarations: [BookManagerComponent, CategoryManagerComponent, RegisterComponent, UserComponent, AddEditCategoryComponent]
+  declarations: [
+    BookManagerComponent,
+    CategoryManagerComponent,
+    RegisterComponent,
+    UserComponent,
+    AddEditCategoryComponent,
+    AddEditBookComponent]
 })
-export class SysModule { }
+export class SysModule {
+}

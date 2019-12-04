@@ -19,8 +19,8 @@ export class CategoryService {
     return this.http.get(url, {params: {}});
   }
 
-  save(category) {
-    const url = '/category';
+  save(category, parentId) {
+    const url = '/category/' + parentId;
     return this.http.post(url, category);
   }
 

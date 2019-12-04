@@ -2,6 +2,8 @@ import {AfterViewInit, Component, ElementRef, OnInit, Renderer2} from '@angular/
 import {CATEGORY_COLS} from '../../../common/enties/Const';
 import {CategoryService} from '../../../common/services/category.service';
 import {Category} from '../../../common/enties/Category';
+import {a} from '@angular/core/src/render3';
+import {MenuItem, TreeNode} from 'primeng/api';
 
 @Component({
   selector: 'app-category-manager',
@@ -11,54 +13,61 @@ import {Category} from '../../../common/enties/Category';
 export class CategoryManagerComponent implements OnInit, AfterViewInit  {
   cols = CATEGORY_COLS;
   scrollHeight = '0px';
-  categories: Category[] = [];
-  selectedCategories: Category[] = [];
+  categories: TreeNode[] = [];
+  selectedCategoryNode: TreeNode;
   showAddOrEditDialog = false;
-  param = {
-    page: 0,
-    size: 10,
-    cateName: '',
-    cateCode: ''
-  };
+  contentItems: MenuItem[];
+  isAdd = true;
   constructor(private el: ElementRef,
               private renderer2: Renderer2,
               private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.queryCategories();
+    this.contentItems = [
+      { label: '新增',  command: (event) => this.addOrEditCategory(this.selectedCategoryNode, true) },
+      { label: '编辑',  command: (event) => this.addOrEditCategory(this.selectedCategoryNode, false) },
+      { label: '删除',  command: (event) => this.deleteCategories(this.selectedCategoryNode) }
+    ];
   }
 
-
-  addOrEditCategory(selected) {
-    console.log('this.selected', this.selectedCategories);
-    if (selected && (this.selectedCategories.length > 1 || this.selectedCategories.length === 0)) {
-        alert('请选中一个分类进行编辑！');
-        return;
+  addOrEditCategory(selectedCategoryNode, isAdd) {
+    console.log('selectedCategoryNode:', selectedCategoryNode);
+    const type = selectedCategoryNode.type;
+    // 到三级分类后不可新增子分类
+    if (isAdd && type.substring(type.indexOf('_'), type.length).length === 5) {
+      return;
     }
+    this.isAdd = isAdd;
     this.showAddOrEditDialog = true;
   }
   queryCategories() {
-    this.selectedCategories = [];
-    this.categoryService.queryCategories(this.param).subscribe((data) => {
+    if (sessionStorage.getItem('cateTree')) {
+      this.categories = JSON.parse(sessionStorage.getItem('cateTree'));
+      return;
+    }
+    this.getCategories();
+  }
+  getCategories() {
+    this.categoryService.categoryTree('0').subscribe((data) => {
       console.log('date', data);
       this.categories = data['data'];
+      sessionStorage.setItem('cateTree', JSON.stringify(this.categories));
     });
   }
   closeListener(event) {
     console.log('e', event);
-    this.selectedCategories = [];
     this.showAddOrEditDialog = false;
     if (event.save) {
-        this.queryCategories();
+      this.getCategories();
     }
   }
-  deleteCategories() {
-    const params = this.selectedCategories.map((item) => {
-      return item.id;
-    });
-    console.log('deleteparams:', params);
-    this.categoryService.delete(params).subscribe((data) => {
+  deleteCategories(selectedCategoryNode) {
+    this.categoryService.delete([selectedCategoryNode.data['id']]).subscribe((data) => {
       console.log('data', data);
+      if (data['success'] === 'true') {
+        this.getCategories();
+      }
     });
   }
   ngAfterViewInit() {
