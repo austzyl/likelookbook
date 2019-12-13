@@ -1,0 +1,11 @@
+#returnToTop {
+  background: url('../../../assets/img/totop.png') no-repeat 0px center;
+  cursor: pointer;
+  right: 5%;
+  text-align: center;
+  position: fixed;
+  bottom: 10px;
+  height: 55px;
+  width: 55px;
+  display: none
+}
