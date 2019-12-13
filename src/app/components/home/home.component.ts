@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {CommonCategory} from '../../common/enties/CommonCategory';
+import {BookService} from '../../common/services/book.service';
+import {BookItem} from '../../common/enties/BookItem';
+import {CategoryService} from '../../common/services/category.service';
+import {Category} from '../../common/enties/Category';
 
 @Component({
   selector: 'app-home',
@@ -10,74 +14,22 @@ import {CommonCategory} from '../../common/enties/CommonCategory';
 })
 export class HomeComponent implements OnInit {
   oTitle = '1';
-  oContent = 'book summary';
-
   images: any[];
-  bookid = '1234565';
 
-  items: CommonCategory[] = [];
+  items: BookItem[] = [];
+  cateNames: any[] = [];
+  cateCodes: any[] = [];
+  categories: Category[] = [];
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router,
+              private bookService: BookService,
+              private cateService: CategoryService) {
 
   }
 
   ngOnInit() {
-    // this.http.get(window['baseUrl']).subscribe(conf => console.log("conf",conf));
-
-    // this.router.navigate(['/history']);
-    for (let i = 0; i < 3; i++) {
-      const item = CommonCategory.instance();
-      item.categoryTitle = '编程' + i;
-      item.categoryId = '' + i;
-      item.mainBookName = 'java编程思想' + i;
-      item.otherBooks = [
-        {
-          bookName: 'python入门1',
-          bookId: '1'
-        },
-        {
-          bookName: 'python入门2',
-          bookId: '2'
-        },
-        {
-          bookName: 'python入门3',
-          bookId: '3'
-        },
-        {
-          bookName: 'python入门4',
-          bookId: '4'
-        },
-        {
-          bookName: 'python入门5',
-          bookId: '5'
-        },
-        {
-          bookName: 'python入门6',
-          bookId: '6'
-        }
-      ];
-      item.ranking = [
-        {
-          bookName: 'java入门了1',
-          bookId: 1
-        },
-        {
-          bookName: 'java入门了2',
-          bookId: 2
-        },
-        {
-          bookName: 'java入门了3',
-          bookId: 3
-        },
-        {
-          bookName: 'java入门了4',
-          bookId: 4
-        }
-      ];
-      item.mainBookImg = 'javascriptdesign.jpg';
-      this.items.push(item);
-
-    }
+    this.getCategories();
+    this.getCateBooks();
 
     this.images = [];
     this.images.push({
@@ -147,8 +99,24 @@ export class HomeComponent implements OnInit {
   }
 
   imageChanged(e) {
-    console.log('e:', e);
     this.oTitle = e.index + 1;
+  }
+
+  getCateBooks() {
+    this.bookService.books().subscribe(data => {
+      console.log('d', data);
+      this.items = data['data'];
+      this.cateNames = data['message'].split(',');
+      this.cateCodes = data['extend'].split(',');
+    });
+  }
+  getCategories() {
+    this.cateService.categories('0', 0, 9).subscribe(data => {
+      console.log('data', data);
+      if (data['success'] === 'true') {
+        this.categories = data['data'];
+      }
+    });
   }
 
 }

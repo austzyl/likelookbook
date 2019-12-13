@@ -32,4 +32,9 @@ export class CategoryService {
     const url = '/category/tree/' + pid;
     return this.http.get(url, {params: {}});
   }
+
+  categories(pid, current, size) {
+    const url = '/category/' + pid + '/' + current + '/' + size;
+    return this.http.get(url, {});
+  }
 }

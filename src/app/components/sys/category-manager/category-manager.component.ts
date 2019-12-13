@@ -41,6 +41,10 @@ export class CategoryManagerComponent implements OnInit, AfterViewInit  {
     this.isAdd = isAdd;
     this.showAddOrEditDialog = true;
   }
+
+  /**
+   * 优先从缓存中获取
+   */
   queryCategories() {
     if (sessionStorage.getItem('cateTree')) {
       this.categories = JSON.parse(sessionStorage.getItem('cateTree'));
@@ -48,6 +52,10 @@ export class CategoryManagerComponent implements OnInit, AfterViewInit  {
     }
     this.getCategories();
   }
+
+  /**
+   * 向服务端发送请求，并设置到缓存中
+   */
   getCategories() {
     this.categoryService.categoryTree('0').subscribe((data) => {
       console.log('date', data);

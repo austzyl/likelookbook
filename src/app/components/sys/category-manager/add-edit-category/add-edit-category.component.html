@@ -1,43 +1,43 @@
 <div class="add-edit-page">
-  <div class="ui-g">
-    <div class="ui-g-12" style="    border-bottom: 1px solid #eeeeee;padding-bottom: 14px !important;">
+  <div class="ui-g ui-g-65">
+    <div class="ui-g-12" style="border-bottom: 1px solid #eeeeee;padding-bottom: 14px !important;">
       <div class="ui-g-6 script_title" style="padding: 0px">{{addOrEditTitle}}</div>
       <div class="ui-g-6" style="padding: 0px">
         <div class="closePop" (click)="closeAddOrEditDialog()"></div>
       </div>
     </div>
   </div>
-  <div class="ui-g">
+  <div class="ui-g ui-g-65">
     <div class="ui-g-12"></div>
     <div class="ui-g-12"></div>
     <div class="ui-g-12"></div>
     <div class="ui-g-12"></div>
-    <div class="ui-g-12">
-      <div class="ui-g-4 label-form">
-        <label for="">分类名称</label>
+    <div class="ui-g-12" style="display: inherit">
+      <div class="label-form">
+        <label >分类名称:</label>
       </div>
-      <div class="ui-g-8" >
-        <input  class="width70" type="text" [(ngModel)]="editCategory.cateName" name="cateCode" id="cateName" pInputText>
+      <div class="width100">
+        <input  class="width100" type="text" [(ngModel)]="editCategory.cateName" name="cateCode" id="cateName" pInputText>
       </div>
     </div>
-    <div class="ui-g-12" *ngIf="!isAdd" >
-      <div class="ui-g-4 label-form">
-        <label for="">分类编码</label>
+    <div class="ui-g-12" *ngIf="!isAdd" style="display: inherit">
+      <div  class="label-form">
+        <label >分类编码:</label>
       </div>
-      <div class="ui-g-8" >
+      <div class="width100">
 <!--
         <p-dropdown styleClass="width70" [options]="cateCodes" [(ngModel)]="editCategory.cateCode"></p-dropdown>
 -->
-        <input class="width70" readonly type="text" [(ngModel)]="editCategory.cateCode" name="cateDir" id="cateCode" pInputText >
+        <input class="width100" readonly type="text" [(ngModel)]="editCategory.cateCode" name="cateDir" id="cateCode" pInputText >
 
       </div>
     </div>
-    <div class="ui-g-12" *ngIf="!isAdd" >
-      <div class="ui-g-4 label-form">
-        <label for="">分类目录</label>
+    <div class="ui-g-12" *ngIf="!isAdd" style="display: inherit">
+      <div  class="label-form">
+        <label>分类目录:</label>
       </div>
-      <div class="ui-g-8">
-        <input class="width70" readonly type="text" [(ngModel)]="editCategory.cateDir" name="cateDir" id="cateDir" pInputText>
+      <div class="width100">
+        <input class="width100" readonly type="text" [(ngModel)]="editCategory.cateDir" name="cateDir" id="cateDir" pInputText>
       </div>
     </div>
     <!--<div class="ui-g-12">
@@ -50,9 +50,9 @@
     </div>-->
 
   </div>
-  <div class="ui-g" style="    position: absolute;bottom: 0px;">
+  <div class="ui-g ui-g-65">
         <div class="ui-g-12">
-      <button  style="float: right;margin-right:50px " type="button" pButton icon="fa fa-save" (click)="save()" label="保存"></button>
+      <button  style="float: right;" type="button" pButton icon="fa fa-save" (click)="save()" label="保存"></button>
 
     </div>
   </div>

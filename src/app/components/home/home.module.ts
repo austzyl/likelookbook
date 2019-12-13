@@ -1,13 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HomeComponent} from './home.component';
 import {RouterModule} from '@angular/router';
 import {GalleriaModule} from 'primeng/galleria';
-import {NavComponent} from '../../common/nav/nav.component';
+import {NavModule} from '../shared/nav/nav.component';
 import {MenubarModule} from 'primeng/menubar';
-import {SessionStorageService} from '../../common/services/session-storage.service';
 import {PanelModule} from 'primeng/panel';
-import {CommonCategoryComponent} from '../../common/common-category/common-category.component';
+import {CommonCategoryComponent} from '../shared/common-category/common-category.component';
+import {RatingModule} from 'primeng/primeng';
+import {FormsModule} from '@angular/forms';
 
 export const ROUTES = [
   {
@@ -19,21 +20,19 @@ export const ROUTES = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(ROUTES),
     GalleriaModule,
     MenubarModule,
-    PanelModule
+    PanelModule,
+    NavModule,
+    RatingModule
   ],
   exports: [
-    HomeComponent
-  ],
+    HomeComponent],
   declarations: [
     HomeComponent,
-    NavComponent,
     CommonCategoryComponent
-  ],
-  providers: [
-    SessionStorageService
-  ],
+  ]
 })
 export class HomeModule { }

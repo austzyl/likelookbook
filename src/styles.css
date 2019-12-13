@@ -5,12 +5,13 @@ html {
 
 body {
   /*background: url(assets/img/bg.jpg) no-repeat;*/
-  padding: 0;
   height: 100%;
+  padding: 0;
   font-size: 14px;
   margin: 0px auto auto auto;
   color: #000000;
   display: block;
+  background-color: #43332d;
 }
 
 div:focus {
@@ -34,10 +35,26 @@ div:focus {
 }
 
 .header {
-  height: 181px;
-  background: url(assets/img/header.jpg) no-repeat;
+  height: 121px;
+  background: url(assets/img/header.jpg) no-repeat 0px -60px;
 }
-
+.cate-content-list {
+  padding: 0px 0 0 0;
+  background: url("assets/img/center_bg.gif") repeat-y center;
+}
+.book-ranking {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #fff8e5;
+  font-family: cursive;
+  opacity: 0.7;
+}
+.cate-title {
+  border-bottom: 1px solid #dddddd;
+  height: 40px;
+  background-color: #fffffe !important;
+}
 .height100 {
   height: 100%;
 }
@@ -108,7 +125,7 @@ body .ui-menubar {
   background-color: #968a7a47 !important;
   padding: 0;
   position: relative;
-  top: 153px;
+  top: 92px;
   height: 28px;
   border: none !important;
 }
@@ -183,11 +200,16 @@ body .ui-table .ui-table-tbody > tr > td {
 .width70 {
   width: 70% !important;
 }
-
+.width100 {
+  width: 100% !important;
+}
+.ui-g-65 {
+  width: 65%;
+  margin: 0 auto;
+}
 .label-form {
-  text-align: right;
-  padding-top: 15px !important;
-  height: 45px;
+  padding: 8px;
+  white-space: nowrap;
 }
 
 .add-edit-page {
@@ -196,5 +218,5 @@ body .ui-table .ui-table-tbody > tr > td {
   bottom: 0px;
   width: 1200px;
   padding: 20px;
-  background-color: #efe6d9;
+  background-color: #ffffff;
 }

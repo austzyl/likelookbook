@@ -1,4 +1,4 @@
-<div style="width: calc(100%);float: right;height: 100%">
+<div style="width: calc(100%);float: right;height: 100%;background-color: #fff">
 <!--
   <p-table
     [value]="categories"
@@ -54,7 +54,7 @@
     <ng-template pTemplate="caption">
       <div class="ui-g">
         <div class="ui-g-12 ui-g-nopad">
-            <button  style="float: right" type="button" pButton icon="fa fa-search" (click)="queryCategories()" label="刷新"></button>
+            <button  style="float: right" type="button" pButton icon="fa fa-search" (click)="getCategories()" label="刷新"></button>
         </div>
       </div>
     </ng-template>

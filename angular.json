@@ -31,7 +31,11 @@
               "node_modules/primeflex/primeflex.css",
               "node_modules/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/modernizr.custom.js",
+              "src/assets/js/jquery-1.8.0.min.js",
+              "src/assets/js/books.js"
+            ]
           },
           "configurations": {
             "production": {

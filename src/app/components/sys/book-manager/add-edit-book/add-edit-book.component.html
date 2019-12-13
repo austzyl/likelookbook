@@ -1,5 +1,5 @@
-<div class="add-edit-page">
-  <div class="ui-g">
+<div class="add-edit-page" >
+  <div class="ui-g ui-g-65" >
     <div class="ui-g-12" style="    border-bottom: 1px solid #eeeeee;padding-bottom: 14px !important;">
       <div class="ui-g-6 script_title" style="padding: 0px">{{addOrEditTitle}}</div>
       <div class="ui-g-6" style="padding: 0px">
@@ -7,48 +7,60 @@
       </div>
     </div>
   </div>
-  <div class="ui-g">
-    <div class="ui-g-12"></div>
-    <div class="ui-g-12"></div>
-    <div class="ui-g-12"></div>
-    <div class="ui-g-12"></div>
-    <div class="ui-g-12">
-      <div class="ui-g-4 label-form">
-        <label for="">分类名称</label>
-      </div>
-      <div class="ui-g-8">
-        <input class="width70" type="text" [(ngModel)]="bookItem.bookName" name="cateName" id="cateName" pInputText>
-      </div>
+  <div class="ui-g ui-g-65">
+    <div class="ui-g-3">
+      <p-tree
+        [value]="cateTree"
+        [loading]="loading"
+        [style]="{overflow: 'auto',width: '100%', height: '465px'}"
+        selectionMode="single"
+        [(selection)]="selectedTreeNode"
+        (onNodeSelect)="nodeSelect($event)"
+      ></p-tree>
     </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4 label-form">
-        <label for="">分类编码</label>
-      </div>
-      <div class="ui-g-8" >
-        <input class="width70" type="text" [(ngModel)]="bookItem.bookAuthor" name="cateCode" id="cateCode" pInputText>
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4 label-form">
-        <label for="">分类目录</label>
-      </div>
-      <div class="ui-g-8">
-        <input class="width70" type="text" [(ngModel)]="bookItem.bookPublish" name="cateDir" id="cateDir" pInputText>
-      </div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-4 label-form">
-        <label for="">分类id</label>
-      </div>
-      <div class="ui-g-8">
-        <input class="width70" type="text" [(ngModel)]="bookItem.cateId" name="cateDir" id="cateDir" pInputText>
+    <div class="ui-g-9">
+      <div class="ui-g">
+        <div class="ui-g-12" style="display: inherit">
+          <div class="label-form">
+            <label>书籍名称:</label>
+          </div>
+          <div class="width100">
+            <input class="width100" type="text" [(ngModel)]="bookItem.bookName" name="cateName" id="cateName" pInputText>
+          </div>
+        </div>
+        <div class="ui-g-12" style="display: inherit">
+          <div class="label-form">
+            <label>书籍作者:</label>
+          </div>
+          <div class="width100" >
+            <input class="width100" type="text" [(ngModel)]="bookItem.bookAuthor" name="cateCode" id="cateCode" pInputText>
+          </div>
+        </div>
+        <div class="ui-g-12" style="display: inherit">
+          <div class="label-form">
+            <label>出版时间:</label>
+          </div>
+          <div class="width100">
+            <input class="width100" type="text" [(ngModel)]="bookItem.bookPublish" name="bookPublish" id="bookPublish" pInputText>
+          </div>
+        </div>
+<!--
+        <div class="ui-g-12" style="display: inherit">
+          <div class="label-form">
+            <label>所属分类:</label>
+          </div>
+          <div class="width100">
+            <input class="width100" type="text" [(ngModel)]="bookItem.cateId" name="cateId" id="cateId" pInputText>
+          </div>
+        </div>
+-->
       </div>
     </div>
   </div>
-  <div class="ui-g" style="    position: absolute;bottom: 0px;">
+  <div class="ui-g ui-g-65" style="position: relative;bottom: 48px;">
     <div class="ui-g-12">
-      <button  style="float: right;margin-right:50px " type="button" pButton icon="fa fa-save" (click)="save()" label="保存"></button>
+      <button  style="float: right;" type="button" pButton icon="fa fa-save" (click)="save()" label="保存"></button>
+    </div>
+  </div>
 
-    </div>
-  </div>
 </div>

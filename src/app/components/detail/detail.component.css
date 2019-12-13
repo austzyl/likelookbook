@@ -32,6 +32,8 @@ body {
 
 }
 .detail-pagecontent {
+  padding-left: 25px;
+  padding-top: 30px;
   height: 100%;
   overflow: hidden;
   white-space: pre-line;

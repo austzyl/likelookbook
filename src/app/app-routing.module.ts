@@ -1,6 +1,5 @@
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {HomeComponent} from './components/home/home.component';
 import {SelectivePreloadingStrategy} from './selective-preloading-strategy';
 
 export const APPROUTES = [
@@ -15,8 +14,23 @@ export const APPROUTES = [
     data: {preload: true}
   },
   {
-    path: 'detail/:id',
+    path: 'category/:cateCode',
+    loadChildren: './components/category/category.module#CategoryModule',
+    data: {preload: true}
+  },
+  {
+    path: 'shelf',
+    loadChildren: './components/shelf/shelf.module#ShelfModule',
+    data: {preload: true}
+  },
+  {
+    path: 'detail/:bookDir',
     loadChildren: './components/detail/detail.module#DetailModule',
+    data: {preload: true}
+  },
+  {
+    path: 'profile/:id',
+    loadChildren: './components/profile/profile.module#ProfileModule',
     data: {preload: true}
   },
   {

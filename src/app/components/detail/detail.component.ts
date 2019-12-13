@@ -11,29 +11,30 @@ export class DetailComponent implements OnInit {
 
   params = {
     currentPage: 0,
+    startLine: -1,
+    endLine: 20,
     flag: '1',
-    filePath: '',
-    bytesCount: '512'
+    bookDir: '',
+    bytesCount: 20
+
   };
 
   prePageContent = '';
   nextPageContent = '';
   bookid;
-  isPageModel = true;
+  isPageModel = false;
 
   constructor(private routeInfo: ActivatedRoute, private router: Router, private bookService: BookService) {
   }
 
   ngOnInit() {
     this.routeInfo.params.subscribe((params: Params) => {
-      this.bookid = params['id'];
-      this.params.filePath = 'D:\\doc\\book\\04现代当代\\《杜拉拉升职记》作者：李可\\《杜拉拉升职记》作者：李可.txt';
-      console.log('bookid', this.bookid);
+      this.params.bookDir = params['bookDir'];
       this.bookService.getContent(this.params).subscribe(data => {
         console.log('data', data);
         if (data['success'] === 'true') {
-          this.prePageContent = data['data']['sw1'];
-          this.nextPageContent = data['data']['sw2'];
+          this.nextPageContent = data['data']['sw1'];
+          // this.nextPageContent = data['data']['sw2'];
         }
       });
     });
@@ -103,7 +104,7 @@ export class DetailComponent implements OnInit {
 
   changePage(flag) {
     if (flag === '0') {
-      if (this.params.currentPage > 1) {
+      if (this.params.currentPage > 0) {
         this.params.currentPage--;
       } else {
         return;
@@ -113,16 +114,19 @@ export class DetailComponent implements OnInit {
     }
 
     this.params.flag = flag;
+
+    this.params.startLine = this.params.currentPage * this.params.bytesCount - 1;
+    this.params.endLine = this.params.currentPage * this.params.bytesCount + this.params.bytesCount;
     this.bookService.getContent(this.params).subscribe(data => {
       console.log('data', data);
       if (data['success'] === 'true') {
         // data.data为null时候，读取到最后一页
-        if (data['data'] === null || !data['data']['sw2'] || !data['data']['sw1']) {
+        if (data['data'] === null || !data['data']['sw1']) {
           this.params.currentPage --;
           return;
         }
-        this.prePageContent = data['data']['sw1'];
-        this.nextPageContent = data['data']['sw2'];
+        this.nextPageContent = data['data']['sw1'];
+        // this.nextPageContent = data['data']['sw2'];
 
       }
     });

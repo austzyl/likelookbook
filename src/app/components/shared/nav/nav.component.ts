@@ -1,7 +1,22 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, NgModule, OnInit, Output} from '@angular/core';
 import {MenuItem} from 'primeng/api';
-import {Router} from '@angular/router';
-import {SessionStorageService} from '../services/session-storage.service';
+import {Router, RouterModule} from '@angular/router';
+import {SessionStorageService} from '../../../common/services/session-storage.service';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {
+  ButtonModule,
+  ContextMenuModule,
+  DropdownModule,
+  InputTextModule,
+  MenubarModule,
+  TreeModule,
+  TreeTableModule
+} from 'primeng/primeng';
+import {ToastModule} from 'primeng/toast';
+import {TableModule} from 'primeng/table';
+import {CategoryComponent} from '../../category/category.component';
+import {ROUTES} from '../../category/category.module';
 
 @Component({
   selector: 'app-nav',
@@ -45,13 +60,14 @@ export class NavComponent implements OnInit {
       },
       {
         label: '分类',
-        routerLink: ['/category/category']
+        routerLink: ['/category/0']
       },
       {
         label: '榜单',
       },
       {
-        label: '我的书架'
+        label: '我的书架',
+        routerLink: ['/shelf']
       }
 
     ];
@@ -61,3 +77,17 @@ export class NavComponent implements OnInit {
   }
 
 }
+@NgModule({
+  imports: [
+    CommonModule,
+    MenubarModule
+  ],
+  providers: [
+    SessionStorageService
+  ],
+  exports: [NavComponent],
+  declarations: [
+    NavComponent
+  ]
+})
+export class NavModule { }

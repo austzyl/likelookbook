@@ -1,3 +1,48 @@
-<p>
-  category works!
-</p>
+<div class="header">
+  <app-nav></app-nav>
+</div>
+<div style="height: calc(100% - 121px)">
+  <div style="float: left;height: 100%;width: 200px">
+    <p-tree
+      [value]="cateTree"
+      [loading]="loading"
+      [style]="{overflow: 'auto',width: '200px'}"
+      selectionMode="single"
+      [(selection)]="selectedTree"
+      (onNodeSelect)="nodeSelect($event)"
+    ></p-tree>
+  </div>
+  <div style="float: right;height: 100%;width: 1000px;background-color: floralwhite">
+    <div class="ui-g">
+      搜索
+    </div>
+    <div class="ui-g">
+      <div class="ui-g-12" >
+        <div class="ui-g-4" *ngFor="let item of books" >
+          <div class="ui-g-12" style="background-color: #ecedf3c7;border-radius: 10px;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);">
+            <div class="ui-g-4">
+              <img src="../../../assets/img/test/180.jpg" alt="" width="100px">
+            </div>
+            <div class="ui-g-8">
+              <div class="ui-g">
+                <div class="ui-g-12 cate-info" title="{{item.bookName}}">
+                  <a [routerLink]="['/profile',item.id]">
+                   {{item.bookName}}
+                  </a>
+                </div>
+                <div class="ui-g-12 cate-info" title="{{item.bookAuthor?item.bookAuthor:'未知'}}">作者：{{item.bookAuthor?item.bookAuthor:'未知'}}</div>
+                <div class="ui-g-12 cate-info" title="{{item.cateName}}">类型：{{item.cateName}}</div>
+                <div class="ui-g-12">
+                  <p-rating iconOffClass="pi pi-star" [ngModel]="item.bookRanking"
+                            [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}"
+                            [iconOffStyle]="{'color': '#aaaaaa'}" disabled="true" stars="5" [cancel]="false"></p-rating>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
