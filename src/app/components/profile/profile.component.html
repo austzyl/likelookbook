@@ -1,9 +1,12 @@
-<div id="profile_view" style="background-color: #ffffff;" (scroll)="scrollDiv($event)">
+<div id="profile_view" style="background-color: #ffffff;height: 100%;" (scroll)="scrollDiv($event)">
   <div class="ui-g">
     <div class="ui-g-12">
       <div class="ui-g-1"></div>
-      <div class="ui-g-2">
-        <img src="../../../assets/img/test/180.jpg" alt="" width="180px">
+      <div class="ui-g-2" *ngIf="item?.bookImageFileString">
+        <img [src]="safeUrl" alt="" width="180px">
+      </div>
+      <div class="ui-g-2" *ngIf="!item?.bookImageFileString">
+        <img src="/assets/img/bookface/old.png" alt="" width="180px">
       </div>
       <div class="ui-g-8">
         <div class="ui-g-12" >
@@ -13,7 +16,7 @@
         <div class="ui-g-12">
           <div class="ui-g-6">
             <p-rating iconOffClass="pi pi-star" [ngModel]="item.bookRanking"
-                      [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}"
+                      [iconOnStyle]="{'color': '#a33500f2','opacity': '1 !important'}"
                       [iconOffStyle]="{'color': '#aaaaaa'}" disabled="true" stars="5" [cancel]="false"></p-rating>
           </div>
           <div class="ui-g-6">{{item.bookReadNum}}</div>
@@ -22,7 +25,7 @@
         <div class="ui-g-12" style="padding-left: 17px;">简介：{{item.bookDesc?item.bookDesc:'无'}}</div>
         <div class="ui-g-12"  style="padding-left: 17px;">
           <button [disabled]="false" type="button"
-                  pButton [routerLink]="['/detail',item.bookDir]"
+                  pButton [routerLink]="['/detail',item.bookDir,item.id]"
                   label="免费阅读" style="margin-top: 35px">
           </button>
           <button [disabled]="false" type="button"
@@ -33,7 +36,7 @@
       </div>
     </div>
   </div>
-  <div class="ui-g">
+ <!-- <div class="ui-g">
     <div class="ui-g-12">
       <div class="ui-g-1"></div>
       <div class="ui-g-11" style="background-color: azure">
@@ -48,7 +51,7 @@
         <div style="float: left;margin-right: 20px;">评分</div>
         <div>
           <p-rating iconOffClass="pi pi-star" [ngModel]="+item.bookTotalCh" (onRate)="rate($event)"
-                    [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}" [iconOffStyle]="{'color': '#aaaaaa'}"
+                    [iconOnStyle]="{'color': '#a33500f2','opacity': '1 !important'}" [iconOffStyle]="{'color': '#aaaaaa'}"
                     stars="5" [cancel]="false"></p-rating>
         </div>
       </div>
@@ -85,7 +88,7 @@
             <div style="float: left;margin-right: 20px;font-weight: bold">{{item.userName}}</div>
             <div style="float: left;">
               <p-rating iconOffClass="pi pi-star" disabled="true" [ngModel]="item.credit"
-                        [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}"
+                        [iconOnStyle]="{'color': '#a33500f2','opacity': '1 !important'}"
                         [iconOffStyle]="{'color': '#aaaaaa'}" stars="5" [cancel]="false"></p-rating>
             </div>
             <div style="float: right;color: #aaaaaa;font-size: 12px;">{{item.createTime}}</div>
@@ -96,185 +99,7 @@
       </div>
       <div class="ui-g-3"></div>
     </div>
-  </div>
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <div class="ui-g-3"></div>
-      <div class="ui-g-6">
-        <div style="float: left;margin-right: 20px;">评分</div>
-        <div>
-          <p-rating iconOffClass="pi pi-star" [ngModel]="+item.bookTotalCh" (onRate)="rate($event)"
-                    [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}" [iconOffStyle]="{'color': '#aaaaaa'}"
-                    stars="5" [cancel]="false"></p-rating>
-        </div>
-      </div>
-      <div class="ui-g-3"></div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-3"></div>
-      <div class="ui-g-6" style="display: inline-flex;">
-        <div style="width: 50px;padding-right: 10px">评论</div>
-        <div style="width: 100%">
-          <textarea [(ngModel)]="item.bookName" style="height:80px;width:100%" rows="10" maxlength="200"></textarea>
-        </div>
-
-      </div>
-      <div class="ui-g-3"></div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-3"></div>
-      <div class="ui-g-6">
-        <button [disabled]="false" type="button"
-                pButton
-                label="确定" style="margin-bottom: 10px;width: 66px;margin-left: 48px;"
-                (click)="commitComment()">
-        </button>
-      </div>
-      <div class="ui-g-3"></div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-3"></div>
-      <div class="ui-g-6" *ngIf="commentsList.length == 0">暂无评论！~</div>
-      <div class="ui-g-6">
-        <div class="ui-g-12" style="border-top: 1px solid #eeeeee;margin: 10px 0;padding-top: 10px !important;" *ngFor="let item of commentsList;let i=index">
-          <div class="ui-g-12">
-            <div style="float: left;margin-right: 20px;font-weight: bold">{{item.userName}}</div>
-            <div style="float: left;">
-              <p-rating iconOffClass="pi pi-star" disabled="true" [ngModel]="item.credit"
-                        [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}"
-                        [iconOffStyle]="{'color': '#aaaaaa'}" stars="5" [cancel]="false"></p-rating>
-            </div>
-            <div style="float: right;color: #aaaaaa;font-size: 12px;">{{item.createTime}}</div>
-          </div>
-          <div class="ui-g-12" style="padding-top: 4px !important;">{{item.content}}</div>
-        </div>
-        <div class="ui-g-12" *ngIf="totalComments != commentsList.length" style="text-align: center"><span style="color: #0077e5;cursor: pointer;" (click)="moreComments()">查看更多评论</span></div>
-      </div>
-      <div class="ui-g-3"></div>
-    </div>
-  </div>
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <div class="ui-g-3"></div>
-      <div class="ui-g-6">
-        <div style="float: left;margin-right: 20px;">评分</div>
-        <div>
-          <p-rating iconOffClass="pi pi-star" [ngModel]="+item.bookTotalCh" (onRate)="rate($event)"
-                    [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}" [iconOffStyle]="{'color': '#aaaaaa'}"
-                    stars="5" [cancel]="false"></p-rating>
-        </div>
-      </div>
-      <div class="ui-g-3"></div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-3"></div>
-      <div class="ui-g-6" style="display: inline-flex;">
-        <div style="width: 50px;padding-right: 10px">评论</div>
-        <div style="width: 100%">
-          <textarea [(ngModel)]="item.bookName" style="height:80px;width:100%" rows="10" maxlength="200"></textarea>
-        </div>
-
-      </div>
-      <div class="ui-g-3"></div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-3"></div>
-      <div class="ui-g-6">
-        <button [disabled]="false" type="button"
-                pButton
-                label="确定" style="margin-bottom: 10px;width: 66px;margin-left: 48px;"
-                (click)="commitComment()">
-        </button>
-      </div>
-      <div class="ui-g-3"></div>
-    </div>
-    <div class="ui-g-12">
-      <div class="ui-g-3"></div>
-      <div class="ui-g-6" *ngIf="commentsList.length == 0">暂无评论！~</div>
-      <div class="ui-g-6">
-        <div class="ui-g-12" style="border-top: 1px solid #eeeeee;margin: 10px 0;padding-top: 10px !important;" *ngFor="let item of commentsList;let i=index">
-          <div class="ui-g-12">
-            <div style="float: left;margin-right: 20px;font-weight: bold">{{item.userName}}</div>
-            <div style="float: left;">
-              <p-rating iconOffClass="pi pi-star" disabled="true" [ngModel]="item.credit"
-                        [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}"
-                        [iconOffStyle]="{'color': '#aaaaaa'}" stars="5" [cancel]="false"></p-rating>
-            </div>
-            <div style="float: right;color: #aaaaaa;font-size: 12px;">{{item.createTime}}</div>
-          </div>
-          <div class="ui-g-12" style="padding-top: 4px !important;">{{item.content}}</div>
-        </div>
-        <div class="ui-g-12" *ngIf="totalComments != commentsList.length" style="text-align: center"><span style="color: #0077e5;cursor: pointer;" (click)="moreComments()">查看更多评论</span></div>
-      </div>
-      <div class="ui-g-3"></div>
-    </div>
-  </div>
-  <div class="ui-g">
-  <div class="ui-g-12">
-    <div class="ui-g-3"></div>
-    <div class="ui-g-6">
-      <div style="float: left;margin-right: 20px;">评分</div>
-      <div>
-        <p-rating iconOffClass="pi pi-star" [ngModel]="+item.bookTotalCh" (onRate)="rate($event)"
-                  [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}" [iconOffStyle]="{'color': '#aaaaaa'}"
-                  stars="5" [cancel]="false"></p-rating>
-      </div>
-    </div>
-    <div class="ui-g-3"></div>
-  </div>
-  <div class="ui-g-12">
-    <div class="ui-g-3"></div>
-    <div class="ui-g-6" style="display: inline-flex;">
-      <div style="width: 50px;padding-right: 10px">评论</div>
-      <div style="width: 100%">
-        <textarea [(ngModel)]="item.bookName" style="height:80px;width:100%" rows="10" maxlength="200"></textarea>
-      </div>
-
-    </div>
-    <div class="ui-g-3"></div>
-  </div>
-  <div class="ui-g-12">
-    <div class="ui-g-3"></div>
-    <div class="ui-g-6">
-      <button [disabled]="false" type="button"
-              pButton
-              label="确定" style="margin-bottom: 10px;width: 66px;margin-left: 48px;"
-              (click)="commitComment()">
-      </button>
-    </div>
-    <div class="ui-g-3"></div>
-  </div>
-  <div class="ui-g-12">
-    <div class="ui-g-3"></div>
-    <div class="ui-g-6" *ngIf="commentsList.length == 0">暂无评论！~</div>
-    <div class="ui-g-6">
-      <div class="ui-g-12" style="border-top: 1px solid #eeeeee;margin: 10px 0;padding-top: 10px !important;" *ngFor="let item of commentsList;let i=index">
-        <div class="ui-g-12">
-          <div style="float: left;margin-right: 20px;font-weight: bold">{{item.userName}}</div>
-          <div style="float: left;">
-            <p-rating iconOffClass="pi pi-star" disabled="true" [ngModel]="item.credit"
-                      [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}"
-                      [iconOffStyle]="{'color': '#aaaaaa'}" stars="5" [cancel]="false"></p-rating>
-          </div>
-          <div style="float: right;color: #aaaaaa;font-size: 12px;">{{item.createTime}}</div>
-        </div>
-        <div class="ui-g-12" style="padding-top: 4px !important;">{{item.content}}</div>
-      </div>
-      <div class="ui-g-12" *ngIf="totalComments != commentsList.length" style="text-align: center"><span style="color: #0077e5;cursor: pointer;" (click)="moreComments()">查看更多评论</span></div>
-    </div>
-    <div class="ui-g-3"></div>
-  </div>
-</div>
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <div class="ui-g-3"></div>
-      <div class="ui-g-6">
-        <div id="returnToTop">
-        </div>
-      </div>
-      <div class="ui-g-3"></div>
-    </div>
-  </div>
+  </div>-->
 
 </div>
 

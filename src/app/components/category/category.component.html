@@ -13,28 +13,37 @@
     ></p-tree>
   </div>
   <div style="float: right;height: 100%;width: 1000px;background-color: floralwhite">
-    <div class="ui-g">
-      搜索
+    <!--内容区-->
+    <div class="ui-g" style="border-bottom: 1px solid #7080670f ">
+      <div class="ui-g-12">
+        <div class="ui-inputgroup" style="width: 400px;float: right;padding-top: 15px;">
+          <input type="text" (keydown)="onEnterPress($event)"  pInputText placeholder="作品名称" [(ngModel)]="param.bookName"  style="width: 300px;position:relative;left: 24px">
+          <span  (click)="param.bookName='';selectedTree=null;param.cateCode=''" class="input-clear">X</span>
+          <button pButton type="button" label="找书" (click)="queryBooksBySearch()"></button>
+        </div>
+      </div>
     </div>
-    <div class="ui-g">
+    <!--书籍展示区-->
+    <div class="ui-g" *ngIf="total != 0">
       <div class="ui-g-12" >
-        <div class="ui-g-4" *ngFor="let item of books" >
+        <div class="ui-g-3" *ngFor="let item of books" >
           <div class="ui-g-12" style="background-color: #ecedf3c7;border-radius: 10px;box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);">
             <div class="ui-g-4">
-              <img src="../../../assets/img/test/180.jpg" alt="" width="100px">
+              <img *ngIf="item.cateCode.startsWith('QCXY')" src="../../../assets/img/bookface/young.png" alt="" width="60px" height="85px">
+              <img *ngIf="!item.cateCode.startsWith('QCXY')" src="../../../assets/img/bookface/old.png" alt="" width="60px" height="85px">
             </div>
             <div class="ui-g-8">
               <div class="ui-g">
                 <div class="ui-g-12 cate-info" title="{{item.bookName}}">
-                  <a [routerLink]="['/profile',item.id]">
+                  <a [routerLink]="['/profile',item.id]" style="font-weight: bold;">
                    {{item.bookName}}
                   </a>
                 </div>
                 <div class="ui-g-12 cate-info" title="{{item.bookAuthor?item.bookAuthor:'未知'}}">作者：{{item.bookAuthor?item.bookAuthor:'未知'}}</div>
                 <div class="ui-g-12 cate-info" title="{{item.cateName}}">类型：{{item.cateName}}</div>
-                <div class="ui-g-12">
+                <div class="ui-g-12" style="padding-left: 0px">
                   <p-rating iconOffClass="pi pi-star" [ngModel]="item.bookRanking"
-                            [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}"
+                            [iconOnStyle]="{'color': '#a33500f2','opacity': '1 !important'}"
                             [iconOffStyle]="{'color': '#aaaaaa'}" disabled="true" stars="5" [cancel]="false"></p-rating>
                 </div>
               </div>
@@ -43,6 +52,18 @@
         </div>
       </div>
     </div>
-
+    <div class="ui-g" *ngIf="total==0">
+      <div class="no-book">没查到呀!</div>
+    </div>
+    <!--分页区-->
+    <div class="ui-g" style="position: absolute;bottom: 0px">
+      <p-paginator
+        [rows]="param.size"
+        [totalRecords]="total"
+        [first]="param.page*param.size"
+        [style]="{'width': '1000px','background-color':'floralwhite','border':'none'}"
+        (onPageChange)="paginate($event)">
+      </p-paginator>
+    </div>
   </div>
 </div>

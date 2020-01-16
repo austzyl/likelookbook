@@ -18,11 +18,12 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   selectedTree: TreeNode;
   param = {
     page: 0,
-    size: 9,
+    size: 12,
     bookName: '',
     bookAuthor: '',
     cateCode: ''
   };
+  total = 0;
   constructor(private bookService: BookService,
               private routeInfo: ActivatedRoute,
               private categoryService: CategoryService,
@@ -40,6 +41,10 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
     });
 
   }
+
+  /**
+   * 获取书籍分类，默认在sessionStorage中查询
+   */
   getTree() {
     if (sessionStorage.getItem('cateTree')) {
       this.cateTree = JSON.parse(sessionStorage.getItem('cateTree'));
@@ -59,6 +64,10 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
       }
     });
   }
+
+  /**
+   * 获取当前分类树种分类并展开，用于首页分类链接跳转
+   */
   handleSelectTree () {
     this.cateTree.filter(item => {
       if (item.type === this.param.cateCode) {
@@ -67,18 +76,52 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
       }
     });
   }
+
+  /**
+   * 选中当前树节点
+   * @param node 当前节点
+   */
   nodeSelect(node) {
     console.log('node:', node);
     node.node.expanded = !node.node.expanded;
     this.param.cateCode = node.node.type;
+    this.param.page = 0;
     this.queryBooks();
   }
+
+  /**
+   * 根据条件查询书籍
+   */
   queryBooks() {
     console.log('querybooks', '查询书籍');
     this.bookService.getBookManagerList(this.param).subscribe((data) => {
       console.log('data', data);
       this.books = data['data'];
+      this.total = data['total'];
     });
+  }
+  queryBooksBySearch() {
+    this.param.page = 0;
+    this.queryBooks();
+  }
+  /**
+   * 分页事件
+   * @param e 事件对象
+   */
+  paginate(e) {
+    console.log('e', e);
+    this.param.page = e.page;
+    this.queryBooks();
+  }
+
+  /**
+   * 回车键查询
+   * @param e 键盘事件
+   */
+  onEnterPress(e) {
+    if (e.keyCode === 13) {
+      this.queryBooksBySearch();
+    }
   }
   ngAfterViewInit() {
     this.renderer2.setStyle(this.el.nativeElement.querySelector('.ui-tree'),

@@ -3,7 +3,16 @@ import {CommonModule} from '@angular/common';
 import {CategoryComponent} from './category.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import {ButtonModule, ContextMenuModule, DropdownModule, InputTextModule, RatingModule, TreeModule, TreeTableModule} from 'primeng/primeng';
+import {
+  ButtonModule,
+  ContextMenuModule,
+  DropdownModule,
+  InputTextModule,
+  PaginatorModule,
+  RatingModule,
+  TreeModule,
+  TreeTableModule
+} from 'primeng/primeng';
 import {ToastModule} from 'primeng/toast';
 import {TableModule} from 'primeng/table';
 import {NavModule} from '../shared/nav/nav.component';
@@ -23,6 +32,7 @@ export const ROUTES = [
     ToastModule,
     InputTextModule,
     ButtonModule,
+    PaginatorModule,
     TableModule,
     DropdownModule,
     TreeTableModule,

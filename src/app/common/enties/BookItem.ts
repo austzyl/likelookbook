@@ -15,6 +15,9 @@ export class BookItem {
   bookReadNum?: string;
   bookStatus?: string;
   bookDesc?: string;
+  cateCode?: string;
+  bookImageFile?: string;
+  bookImageFileString?: string;
 
   constructor(
     id: string,
@@ -29,7 +32,10 @@ export class BookItem {
     bookRanking: string,
     bookReadNum: string,
     bookStatus: string,
-    bookDesc: string
+    bookDesc: string,
+    cateCode: string,
+    bookImageFile: string,
+  bookImageFileString: string
   ) {
     this.id = id;
     this.bookName = bookName;
@@ -44,10 +50,16 @@ export class BookItem {
     this.bookReadNum = bookReadNum;
     this.bookStatus = bookStatus;
     this.bookDesc = bookDesc;
+    this.cateCode = cateCode;
+    this.bookImageFile = bookImageFile;
+    this.bookImageFileString = bookImageFileString;
   }
 
   static newInstance(): any {
     return new BookItem('',
+      '',
+      '',
+      '',
       '',
       '',
       '',

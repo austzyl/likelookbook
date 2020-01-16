@@ -12,17 +12,17 @@
       <div class="ui-g">
         <div class="ui-g-12 ui-g-nopad">
           <div class="ui-g-3" style="text-align: center;padding: 5px 15px">
-            <img src="../../../assets/img/test/180.jpg" alt="" width="80%"
+            <img src="../../../assets/img/bookface/{{item_0?.cateCode.substring(0,4)}}_1.jpg" alt="" width="80%"
                  style="box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1)">
             <div style="text-align: center;font-size: larger;margin-top: 30px;">{{item_0?.bookName}}</div>
-            <div style="text-align: center;font-size: large;margin-top: 15px">查看详情</div>
+            <div style="text-align: center;font-size: large;margin-top: 15px"><a [routerLink]="['/profile',item_0?.id]" >查看详情</a></div>
           </div>
           <div class="ui-g-9 height100">
             <div class="ui-g height100">
               <div class="ui-g-4 ui-g-nopad height33" *ngFor="let item of otherItems;let i = index">
                 <div style="width: 95%;height: 100px;padding: 10px;box-shadow: 5px 5px 13px rgba(0, 0, 0, 0.05)">
                   <div style="float: left">
-                    <img src="../../../assets/img/test/180.jpg" alt="" width="60px">
+                    <img src="../../../assets/img/bookface/{{item?.cateCode.substring(0,4)}}_{{i+2}}.jpg" alt="" width="60px">
                   </div>
                   <div style="float: right;height: 80px;width: 110px;">
                     <div class="book-name" title="{{item?.bookName}}">
@@ -30,7 +30,6 @@
                     </div>
                     <div class="book-cateName" title="{{item?.cateName}}">{{item?.cateName}}</div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -52,7 +51,7 @@
             </div>
             <div class="ui-g-5 text-align-right" style="padding: 5px">
               <p-rating iconOffClass="pi pi-star" [ngModel]="hot.bookRanking"
-                        [iconOnStyle]="{'color': '#0077e5','opacity': '1 !important'}"
+                        [iconOnStyle]="{'color': '#a33500f2','opacity': '1 !important'}"
                         [iconOffStyle]="{'color': '#aaaaaa'}" disabled="true" stars="5" [cancel]="false"></p-rating>
             </div>
           </div>

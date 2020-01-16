@@ -10,31 +10,31 @@ export class CategoryService {
   }
 
   queryCategories(params) {
-    const url = '/category';
+    const url = '/yunqi/category';
     return this.http.get(url, {params: params});
   }
 
   queryCategoryById(id) {
-    const url = '/category/' + id;
+    const url = '/yunqi/category/' + id;
     return this.http.get(url, {params: {}});
   }
 
   save(category, parentId) {
-    const url = '/category/' + parentId;
+    const url = '/yunqi/category/' + parentId;
     return this.http.post(url, category);
   }
 
   delete(ids) {
-    const url = '/category/del';
+    const url = '/yunqi/category/del';
     return this.http.post(url, ids);
   }
   categoryTree(pid) {
-    const url = '/category/tree/' + pid;
+    const url = '/yunqi/category/tree/' + pid;
     return this.http.get(url, {params: {}});
   }
 
   categories(pid, current, size) {
-    const url = '/category/' + pid + '/' + current + '/' + size;
+    const url = '/yunqi/category/' + pid + '/' + current + '/' + size;
     return this.http.get(url, {});
   }
 }

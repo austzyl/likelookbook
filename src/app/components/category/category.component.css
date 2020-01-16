@@ -3,4 +3,22 @@
   text-overflow: ellipsis;
   overflow: hidden;
   width: 180px;
+  padding: 0 0 3px 3px;
+  font-size: 13px;
+}
+.input-clear {
+  background-color: #ffffff;
+  padding: 7px;
+  color: #ddd;
+  position: relative;
+  right: 2px;
+  height: 14px;
+  top: 1px;
+  cursor: pointer;
+}
+.no-book {
+  margin: 100px auto;
+  font-size: 35px;
+  color: #ddd;
+  font-family: cursive;
 }

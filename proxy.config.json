@@ -1,6 +1,6 @@
 {
   "/":{
-    "target":"http://localhost/yunqi",
+    "target":"http://localhost:18989",
     "secure":false,
     "logLevel":"debug",
     "changeOrigin":true

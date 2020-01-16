@@ -1,5 +1,5 @@
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs/index';
+import {Observable, of, throwError} from 'rxjs/index';
 import {Inject, Injectable} from '@angular/core';
 import {catchError} from 'rxjs/internal/operators';
 /**
@@ -16,12 +16,11 @@ export class CustomInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // const url = this._config.localhost;
      req = req.clone({
-     setHeaders: {
-      Authorization: '123456'
-     }
-     /*url: url + req.url*/
+       setHeaders: {
+        Authorization: '123456'
+       }
+       /*url: url + req.url*/
      });
-
     return next.handle(req).pipe(catchError(this.handleError));
   }
 

@@ -44,16 +44,32 @@
             <input class="width100" type="text" [(ngModel)]="bookItem.bookPublish" name="bookPublish" id="bookPublish" pInputText>
           </div>
         </div>
-<!--
         <div class="ui-g-12" style="display: inherit">
           <div class="label-form">
-            <label>所属分类:</label>
+            <label>封面:</label>
           </div>
           <div class="width100">
-            <input class="width100" type="text" [(ngModel)]="bookItem.cateId" name="cateId" id="cateId" pInputText>
+            <p-fileUpload
+              name="packageFile"
+              accept=".jpg,.jpeg,.png"
+              auto="true"
+              customUpload="true"
+              (onUpload)="uploadImage($event)"
+              (uploadHandler)="myUploader($event)"
+              maxFileSize="1000000000"
+              [multiple]="false"
+              [showCancelButton]="false"
+              styleClass="customFileUpload"
+              customUploadFile="customUploadFile"
+              invalidFileSizeMessageSummary="{0}:文件大小不符，"
+              invalidFileSizeMessageDetail="上传文件大小不能大于{0}"
+              invalidFileTypeMessageSummary="{0}:文件类型不符，"
+              invalidFileTypeMessageDetail="上传类型与工具包类型{0}不符"
+            >
+
+            </p-fileUpload>
           </div>
         </div>
--->
       </div>
     </div>
   </div>

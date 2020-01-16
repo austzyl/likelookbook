@@ -167,9 +167,9 @@ a {
   -webkit-perspective: 1800px;
   -moz-perspective: 1800px;
   perspective: 1800px;
-  -webkit-perspective-origin: 50% 15%;
-  -moz-perspective-origin: 50% 15%;
-  perspective-origin: 50% 15%;
+  -webkit-perspective-origin: 77% 4%;
+  -moz-perspective-origin: 77% 4%;
+  perspective-origin: 77% 4%;
 }
 
 .bk-list li {

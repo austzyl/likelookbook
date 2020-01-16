@@ -80,7 +80,7 @@ export class CategoryManagerComponent implements OnInit, AfterViewInit  {
   }
   ngAfterViewInit() {
     // 修改表格高度撑开页面
-    this.scrollHeight = (document.documentElement.clientHeight - 118) + 'px';
+    this.scrollHeight = (document.documentElement.clientHeight - 239) + 'px';
     // this.el.nativeElement.querySelector('.ui-table-scrollable-body').style.height = this.scrollHeight;
     // this.renderer2.setStyle(this.el.nativeElement.querySelector('.ui-table-scrollable-body'), 'height', this.scrollHeight);
   }

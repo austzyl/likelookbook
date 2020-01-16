@@ -7,8 +7,9 @@ import {NavModule} from '../shared/nav/nav.component';
 import {MenubarModule} from 'primeng/menubar';
 import {PanelModule} from 'primeng/panel';
 import {CommonCategoryComponent} from '../shared/common-category/common-category.component';
-import {RatingModule} from 'primeng/primeng';
+import {CardModule, RatingModule} from 'primeng/primeng';
 import {FormsModule} from '@angular/forms';
+import {AdviseModule} from '../shared/advise/advise.component';
 
 export const ROUTES = [
   {
@@ -26,7 +27,9 @@ export const ROUTES = [
     MenubarModule,
     PanelModule,
     NavModule,
-    RatingModule
+    RatingModule,
+    AdviseModule,
+    CardModule
   ],
   exports: [
     HomeComponent],

@@ -17,6 +17,7 @@ import {ToastModule} from 'primeng/toast';
 import {TableModule} from 'primeng/table';
 import {CategoryComponent} from '../../category/category.component';
 import {ROUTES} from '../../category/category.module';
+import {UserService} from '../../../common/services/user.service';
 
 @Component({
   selector: 'app-nav',
@@ -30,29 +31,35 @@ export class NavComponent implements OnInit {
   @Output()
   logoutEvent: EventEmitter<any> = new EventEmitter();
   isLogin = false;
-
+  isManager = false;
   constructor(private router: Router,
+               private userService: UserService,
                private sessionStorageService: SessionStorageService) { }
 
 
   toRegister() {
-    console.log('auth:', this.sessionStorageService.getAuth());
-
-    this.router.navigate(['/user/signup']);
+    this.router.navigate(['/user/register']);
   }
   toLogin() {
-    console.log('auth:', this.sessionStorageService.getAuth());
-
     this.router.navigate(['/user/login']);
   }
 
   logout() {
-    this.sessionStorageService.clearAll();
-    console.log('auth:', this.sessionStorageService.getAuth());
-    this.router.navigate(['/user/login']);
+    this.userService.logout({userId: this.sessionStorageService.getAuth('userId')}).subscribe(res => {
+      console.log('logout:', res);
+      if (res['success'] === 'true') {
+        this.sessionStorageService.clearAuth();
+        this.isLogin = false;
+        this.isManager = false;
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
   ngOnInit() {
+    this.isLogin = this.userService.isAuthenticated();
+    this.isManager = this.userService.isManager();
+
     this.items =  [
       {
         label: '首页',
@@ -63,17 +70,27 @@ export class NavComponent implements OnInit {
         routerLink: ['/category/0']
       },
       {
-        label: '榜单',
+        label: '我的书架',
+        routerLink: ['/shelf'],
+        visible: this.userService.isAuthenticated()
       },
       {
-        label: '我的书架',
-        routerLink: ['/shelf']
+        label: '书籍管理',
+        routerLink: ['/sys'],
+        visible: this.isManager
+      },
+      {
+        label: '分类管理',
+        routerLink: ['/sys/category'],
+        visible: this.isManager
+      },
+      {
+        label: '用户管理',
+        routerLink: ['/sys/user'],
+        visible: this.isManager
       }
-
     ];
-    if (this.sessionStorageService.getAuth()) {
-      this.isLogin = true;
-    }
+
   }
 
 }
@@ -82,9 +99,7 @@ export class NavComponent implements OnInit {
     CommonModule,
     MenubarModule
   ],
-  providers: [
-    SessionStorageService
-  ],
+  providers: [],
   exports: [NavComponent],
   declarations: [
     NavComponent

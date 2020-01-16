@@ -17,9 +17,9 @@
                 <div class="book-category">
                   <a [routerLink]="['/category',cate.cateCode]">
                     <div>
-                      <img src="../../../assets/img/category/g{{i+1}}.png" alt="" width="25px" height="20px">
+                      <img src="../../../assets/img/category/g{{i+1}}.png" alt="" width="20px" height="20px">
                     </div>
-                    <div>
+                    <div style="font-family: cursive;font-weight: bold;">
                       {{cate.cateName}}
 
                     </div>
@@ -36,7 +36,7 @@
         </p-panel>
       </div>
       <div class="ui-g-6">
-        <p-galleria [images]="images" (onImageClicked)="clickImage($event)" (onImageChange)="imageChanged($event)"
+        <p-galleria  [images]="images" (onImageClicked)="clickImage($event)" (onImageChange)="imageChanged($event)"
                     panelWidth="auto" panelHeight="200" showCaption="true"></p-galleria>
       </div>
       <div class="ui-g-3">
@@ -45,12 +45,10 @@
             强烈推荐
           </p-header>
           <div class="ui-g">
-            <div class="ui-g-12" style="border-bottom: 1px solid #dddddd;"><a [routerLink]="['/detail']">1&nbsp;&nbsp;Java从入门到精通</a></div>
-            <div class="ui-g-12" style="border-bottom: 1px solid #dddddd;">2&nbsp;&nbsp;数据结构与算法分析</div>
-            <div class="ui-g-12" style="border-bottom: 1px solid #dddddd;">3&nbsp;&nbsp;Python你不知道的秘密</div>
-            <div class="ui-g-12" style="border-bottom: 1px solid #dddddd;">4&nbsp;&nbsp;Angular下一代开发应用</div>
-            <div class="ui-g-12" style="border-bottom: 1px solid #dddddd;">5&nbsp;&nbsp;Redis实战</div>
-            <div class="ui-g-12" style="\text-align: right">更多</div>
+            <div class="ui-g-12" *ngFor="let item of recommends" style="border-bottom: 1px solid #dddddd;"><a [routerLink]="['/profile', item.id]">{{item.bookName}}</a></div>
+<!--
+            <div class="ui-g-12" style="text-align: right">更多</div>
+-->
 
           </div>
         </p-panel>
@@ -64,13 +62,30 @@
   <div *ngFor="let item of items;let i=index">
     <app-common-category [items]="item" [cateName]="cateNames[i]" [cateCode]="cateCodes[i]"></app-common-category>
   </div>
-  <div class="ui-g" style="width: 1200px;height: 50px;margin: 0 auto ;text-align: center;background-color: #ed7548;">
-    <p style="width: 100%;text-align: center">
-      请所有作者发布作品时务必遵守国家互联网信息管理办法规定，我们拒绝任何色情小说，一经发现，即作删除！举报电话：010-00000000
+  <div style="width: 1200px;height: 30px;margin: 0 auto ;text-align: center;background-color: #efefee;padding-top: 10px">
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34052302341763" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+      <img src="assets/img/gaba.png" style="float:left;"/>
+      <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">皖公网安备 34052302341763号 &nbsp;&nbsp;&nbsp;&nbsp; 皖ICP备19024615号</p></a>
+  </div>
+  <div class="ui-g" style="width: 1200px;height: 50px;margin: 0 auto ;text-align: center;color:#939393;background-color: #efefee;">
+    <!--<p style="width: 100%;text-align: center">
+      请所有作者发布作品时务必遵守国家互联网信息管理办法规定，我们拒绝任何色情、暴力等违反中国法律规定的信息上传，一经发现，即作删除！举报邮箱：aust_zyl1@163.com
+    </p>-->
+    <p style="width: 100%;text-align: center;color:#939393;">
+      本站所收录的作品、图片等所有资源来自互联网。如前述内容侵害您的权益，欢迎举报，一经核实，立即删除，本站不承担任何责任
     </p>
-    <p style="width: 100%;text-align: center">
-      本站所收录的作品、社区话题、用户评论、用户上传内容或图片等均属用户个人行为。如前述内容侵害您的权益，欢迎举报投诉，一经核实，立即删除，本站不承担任何责任
+    <p style="width: 100%;text-align: center;color:#939393;">
+      举报邮箱：aust_zyl1@163.com
     </p>
   </div>
-
 </div>
+<!--
+<div *ngIf="!showAdvise" (click)="showAdvise = !showAdvise" style="width: 120px;position: fixed;right: 0px;bottom: 50px;">
+  <p-card>
+    欢迎反馈！~
+  </p-card>
+</div>
+<div *ngIf="showAdvise" style="width: 320px;position: fixed;right: 0px;bottom: 50px;">
+  <app-advise></app-advise>
+</div>
+-->

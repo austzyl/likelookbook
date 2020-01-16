@@ -12,6 +12,7 @@ body {
   color: #000000;
   display: block;
   background-color: #43332d;
+  overflow-x: hidden;
 }
 
 div:focus {
@@ -33,7 +34,18 @@ div:focus {
   box-sizing: border-box;
   font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
 }
-
+.custom-placeholder::-webkit-input-placeholder { /* WebKit browsers */
+  color: #646765 !important;
+}
+.custom-placeholder:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #646765 !important;
+}
+.custom-placeholder::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #646765 !important;
+}
+.custom-placeholder:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #646765 !important;
+}
 .header {
   height: 121px;
   background: url(assets/img/header.jpg) no-repeat 0px -60px;
@@ -219,4 +231,21 @@ body .ui-table .ui-table-tbody > tr > td {
   width: 1200px;
   padding: 20px;
   background-color: #ffffff;
+}
+
+/******************************************Form CSS****************************************/
+body .ui-inputtext:enabled:hover:not(.ui-state-error) {
+  border-color: #007ad9 !important;
+}
+body .ui-inputtext {
+  border: 1px solid #eeeeee !important;
+}
+
+body .mid-class .ui-inputtext {
+  border: none !important;
+  background: #ffffff00 !important;
+  text-align: left !important;
+  font-size: 16px !important;
+  color: #000 !important;
+  padding: 0 !important;
 }

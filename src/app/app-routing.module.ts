@@ -1,12 +1,20 @@
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {SelectivePreloadingStrategy} from './selective-preloading-strategy';
+import {AuthenticatedGuard} from './common/interceptors/AuthenticatedGuard';
+import {SessionStorageService} from './common/services/session-storage.service';
+import {ManagerGuard} from './common/interceptors/ManagerGuard';
 
 export const APPROUTES = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'root',
     pathMatch: 'full'
+  },
+  {
+    path: 'root',
+    loadChildren: './components/home/home.module#HomeModule',
+    data: {preload: true}
   },
   {
     path: 'home',
@@ -24,7 +32,7 @@ export const APPROUTES = [
     data: {preload: true}
   },
   {
-    path: 'detail/:bookDir',
+    path: 'detail/:bookDir/:id',
     loadChildren: './components/detail/detail.module#DetailModule',
     data: {preload: true}
   },
@@ -37,6 +45,11 @@ export const APPROUTES = [
     path: 'sys',
     loadChildren: './components/sys/sys.module#SysModule',
     data: {preload: true}
+  },
+  {
+    path: 'user',
+    loadChildren: './components/user/user.module#UserModule',
+    data: {preload: true}
   }
   ];
 
@@ -45,6 +58,6 @@ export const APPROUTES = [
         RouterModule.forRoot(APPROUTES, {preloadingStrategy: SelectivePreloadingStrategy})
     ],
   exports: [RouterModule],
-  providers: [SelectivePreloadingStrategy]
+  providers: [SelectivePreloadingStrategy, AuthenticatedGuard, SessionStorageService, ManagerGuard]
 })
 export class AppRoutingModule {}

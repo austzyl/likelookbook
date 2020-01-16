@@ -3,6 +3,8 @@ import {BookItem} from '../../common/enties/BookItem';
 import {e} from '@angular/core/src/render3';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {BookService} from '../../common/services/book.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {SafeResourceUrl} from '@angular/platform-browser/src/security/dom_sanitization_service';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +16,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   commentsList: any[] = [];
   totalComments = 0;
   bookId = '';
+  safeUrl: SafeResourceUrl;
   constructor(private routeInfo: ActivatedRoute,
+              private sanitizer: DomSanitizer,
               private bookService: BookService) { }
 
   ngOnInit() {
@@ -23,6 +27,9 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.bookService.getOne(this.bookId).subscribe(item => {
         console.log('item', item);
         this.item = item['data'];
+        if (this.item.bookImageFileString) {
+          this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' +  this.item.bookImageFileString);
+        }
       });
     });
   }

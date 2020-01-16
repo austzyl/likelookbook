@@ -9,33 +9,37 @@ export class BookService {
   constructor(private http: HttpClient) { }
 
   getContent(params) {
-    const toolUrl = '/book/detail';
-    return this.http.post(toolUrl, params);
+    const url = '/yunqi/book/detail';
+    return this.http.post(url, params);
   }
   getBookManagerList(params) {
-    const url = '/book/list';
+    const url = '/yunqi/book/list';
     return this.http.get(url, {params: params});
   }
 
   save(item) {
-    const url = '/book';
+    const url = '/yunqi/book';
     return this.http.post(url, item);
   }
   books() {
-    const url = '/book/books';
+    const url = '/yunqi/book/books';
     return this.http.get(url, {});
   }
   batchSave(params) {
-    const url = '/book/books';
+    const url = '/yunqi/book/books';
     return this.http.post(url, params);
   }
 
   delete(ids) {
-    const url = '/book/del';
+    const url = '/yunqi/book/del';
     return this.http.post(url, {ids: ids});
   }
   getOne(id) {
-    const url = '/book/' + id;
+    const url = '/yunqi/book/' + id;
+    return this.http.get(url, {});
+  }
+  getBooksRankings() {
+    const url = '/yunqi/book?page=0&size=5';
     return this.http.get(url, {});
   }
 }

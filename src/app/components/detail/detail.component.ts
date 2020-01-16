@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {BookService} from '../../common/services/book.service';
+import {EventManager} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-detail',
@@ -15,21 +16,25 @@ export class DetailComponent implements OnInit {
     endLine: 20,
     flag: '1',
     bookDir: '',
-    bytesCount: 20
+    bytesCount: 20,
+    bookId: ''
 
   };
 
   prePageContent = '';
   nextPageContent = '';
-  bookid;
   isPageModel = false;
 
-  constructor(private routeInfo: ActivatedRoute, private router: Router, private bookService: BookService) {
+  constructor(private routeInfo: ActivatedRoute,
+              private eventManager: EventManager,
+              private router: Router,
+              private bookService: BookService) {
   }
 
   ngOnInit() {
     this.routeInfo.params.subscribe((params: Params) => {
       this.params.bookDir = params['bookDir'];
+      this.params.bookId = params['id'];
       this.bookService.getContent(this.params).subscribe(data => {
         console.log('data', data);
         if (data['success'] === 'true') {
@@ -37,6 +42,17 @@ export class DetailComponent implements OnInit {
           // this.nextPageContent = data['data']['sw2'];
         }
       });
+    });
+    // 左右键键盘事件
+    this.eventManager.addGlobalEventListener('window', 'keydown', (event: any) => {
+      console.log('监听到键盘按下事件了', event);
+      console.log('监听到键盘按下事件了', event.keyCode);
+      if (event.keyCode === 37) {
+        // 监听到 上下左右 的键盘按下事件时，调用我自己的rePosition()方法~
+        this.changePage('0');
+      } else if (event.keyCode === 39) {
+        this.changePage('1');
+      }
     });
     /*const tsthis = this;
     /!** This is high-level function.
@@ -122,7 +138,7 @@ export class DetailComponent implements OnInit {
       if (data['success'] === 'true') {
         // data.data为null时候，读取到最后一页
         if (data['data'] === null || !data['data']['sw1']) {
-          this.params.currentPage --;
+          this.params.currentPage--;
           return;
         }
         this.nextPageContent = data['data']['sw1'];

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {UserService} from '../../common/services/user.service';
 
 declare var $: any;
 declare var Books: any;
@@ -9,7 +11,8 @@ declare var Books: any;
 })
 export class ShelfComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
     console.log('$', $);

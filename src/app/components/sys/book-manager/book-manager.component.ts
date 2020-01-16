@@ -141,13 +141,24 @@ export class BookManagerComponent implements OnInit, AfterViewInit {
     };
     this.queryBooks();
   }
-
+  enterQuery(e) {
+    this.param = {
+      page: 0,
+      size: 10,
+      bookName: e.target.value,
+      bookAuthor: '',
+      cateCode: ''
+    };
+    if (e.keyCode === 13) {
+      this.queryBooks();
+    }
+  }
   ngAfterViewInit() {
     // 修改表格高度撑开页面
-    this.scrollHeight = (document.documentElement.clientHeight - 121) + 'px';
+    this.scrollHeight = (document.documentElement.clientHeight - 242) + 'px';
     // this.el.nativeElement.querySelector('.ui-table-scrollable-body').style.height = this.scrollHeight;
     this.renderer2.setStyle(this.el.nativeElement.querySelector('.ui-table-scrollable-body'), 'height', this.scrollHeight);
 
-    this.renderer2.setStyle(this.el.nativeElement.querySelector('.ui-tree'), 'height', (document.documentElement.clientHeight - 1) + 'px');
+    this.renderer2.setStyle(this.el.nativeElement.querySelector('.ui-tree'), 'height', (document.documentElement.clientHeight - 122) + 'px');
   }
 }
