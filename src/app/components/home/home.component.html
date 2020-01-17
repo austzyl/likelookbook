@@ -36,7 +36,7 @@
         </p-panel>
       </div>
       <div class="ui-g-6">
-        <p-galleria  [images]="images" (onImageClicked)="clickImage($event)" (onImageChange)="imageChanged($event)"
+        <p-galleria [style]="{'cursor':'pointer'}" [images]="images" (onImageClicked)="clickImage($event)" (onImageChange)="imageChanged($event)"
                     panelWidth="auto" panelHeight="200" showCaption="true"></p-galleria>
       </div>
       <div class="ui-g-3">

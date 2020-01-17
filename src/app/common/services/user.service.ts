@@ -30,10 +30,17 @@ export class UserService {
     const url = 'yunqi/user/forgotPassword';
     return this.http.post(url, user);
   }
+
+  checkUser(userId) {
+    const url = 'yunqi/user/checkUser?userId=' + userId;
+    return this.http.get(url, {});
+  }
+
   isAuthenticated() {
     return true === this.sessionStorageService.getAuth('isa');
   }
   isManager() {
     return true === this.sessionStorageService.getAuth('ism');
   }
+
 }

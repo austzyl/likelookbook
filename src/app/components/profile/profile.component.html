@@ -1,3 +1,4 @@
+<p-growl [(value)]="message" life="2000"></p-growl>
 <div id="profile_view" style="background-color: #ffffff;height: 100%;" (scroll)="scrollDiv($event)">
   <div class="ui-g">
     <div class="ui-g-12">
@@ -19,7 +20,7 @@
                       [iconOnStyle]="{'color': '#a33500f2','opacity': '1 !important'}"
                       [iconOffStyle]="{'color': '#aaaaaa'}" disabled="true" stars="5" [cancel]="false"></p-rating>
           </div>
-          <div class="ui-g-6">{{item.bookReadNum}}</div>
+          <div class="ui-g-6"><!--{{item.bookReadNum}}--></div>
 
         </div>
         <div class="ui-g-12" style="padding-left: 17px;">简介：{{item.bookDesc?item.bookDesc:'无'}}</div>
@@ -102,5 +103,7 @@
   </div>-->
 
 </div>
-
+<a style="position: fixed;top: 20px;left: 25px;cursor: pointer" (click)="goBack()">
+  <img src="./assets/img/homepage.png" alt="返回主页" width="40">
+</a>
 

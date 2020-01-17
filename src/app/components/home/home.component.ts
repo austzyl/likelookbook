@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   categories: Category[] = [];
 
   recommends: BookItem[] = [];
+  scrollBooks: BookItem[] = [];
 
   constructor(private router: Router,
               private bookService: BookService,
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
     this.getCategories();
     this.getCateBooks();
     this.getRecommends();
+    this.getScrollBooks();
     this.images = [];
     for (let i = 0; i < 12; i++) {
       this.images.push({
@@ -46,6 +48,7 @@ export class HomeComponent implements OnInit {
 
   clickImage(event) {
     console.log('event:', event);
+    this.router.navigate(['/profile', this.scrollBooks[event.index].id]);
   }
 
   imageChanged(e) {
@@ -77,8 +80,14 @@ export class HomeComponent implements OnInit {
       if (data['success'] === 'true') {
         this.recommends = data['data'];
       }
-
     });
   }
 
+  getScrollBooks() {
+    this.bookService.getScrollBooks().subscribe(data => {
+      if (data['success'] === 'true') {
+        this.scrollBooks = data['data'];
+      }
+    });
+  }
 }

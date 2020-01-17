@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ShelfComponent } from './shelf.component';
 import {RouterModule} from '@angular/router';
 import {NavModule} from '../shared/nav/nav.component';
+import {GrowlModule} from 'primeng/growl';
 
 export const ROUTES = [
   {
@@ -15,7 +16,8 @@ export const ROUTES = [
   imports: [
     CommonModule,
     NavModule,
-    RouterModule.forChild(ROUTES)
+    RouterModule.forChild(ROUTES),
+    GrowlModule
   ],
   declarations: [ShelfComponent]
 })

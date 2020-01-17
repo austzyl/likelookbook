@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Params, Router} from '@angular/router';
 import {BookService} from '../../common/services/book.service';
 import {EventManager} from '@angular/platform-browser';
 
@@ -32,6 +32,8 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log('routeInfo', this.routeInfo);
     this.routeInfo.params.subscribe((params: Params) => {
       this.params.bookDir = params['bookDir'];
       this.params.bookId = params['id'];
@@ -173,4 +175,7 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  goBack() {
+    history.go(-1);
+  }
 }

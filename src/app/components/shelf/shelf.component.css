@@ -756,3 +756,27 @@ a {
   margin: 10px;
   float: left;
 }
+.book-shelf-title {
+  margin: 0 auto;
+  font-size: 19px;
+  word-break: break-all;
+  height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.book-shelf-title-left {
+  padding: 0 10px;
+}
+.book-shelf-remove {
+  width: 30px;
+  height: 30px;
+  background-color: #7c5656;
+  position: relative;
+  bottom: -422px;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 0px 9px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}

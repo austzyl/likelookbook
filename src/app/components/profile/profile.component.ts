@@ -5,6 +5,8 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {BookService} from '../../common/services/book.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {SafeResourceUrl} from '@angular/platform-browser/src/security/dom_sanitization_service';
+import {SessionStorageService} from '../../common/services/session-storage.service';
+import {Message} from 'primeng/api';
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +17,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   item: BookItem = BookItem.newInstance();
   commentsList: any[] = [];
   totalComments = 0;
+  message: Message[] = [];
   bookId = '';
   safeUrl: SafeResourceUrl;
   constructor(private routeInfo: ActivatedRoute,
               private sanitizer: DomSanitizer,
+              private sessionStorageService: SessionStorageService,
+              private router: Router,
               private bookService: BookService) { }
 
   ngOnInit() {
@@ -59,6 +64,19 @@ export class ProfileComponent implements OnInit, AfterViewInit {
    */
   addToShelf(item) {
     // TODO 保存到当前用户书架之中
+    const userId = this.sessionStorageService.getAuth('userId');
+    if (!userId) {
+      this.message = [{severity: 'info', summary: '请先登录！'}];
+      return;
+    } else {
+      this.bookService.saveToShelf(userId, this.bookId, 0).subscribe(res => {
+        if (res['success'] === 'true') {
+          this.message = [{severity: 'info', summary: '添加成功！'}];
+        } else {
+          this.message = [{severity: 'error', summary: res['message'] ? res['message'] : '请求失败！'}];
+        }
+      });
+    }
   }
   ngAfterViewInit(): void {
     const goTopBtn = document.getElementById('returnToTop');
@@ -84,5 +102,8 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       // 滚动高度大于50显示返回顶部按钮
       scrollTop > 50 ? (goTopBtn.style.display = 'block') : (goTopBtn.style.display = 'none');
     }
+  }
+  goBack() {
+    history.go(-1);
   }
 }

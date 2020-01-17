@@ -1,15 +1,15 @@
-<p-growl [(value)]="message" life="2000"></p-growl>
+<p-growl [(value)]="message" life="3000"></p-growl>
 
 <div class="mid-class">
   <div class="art-right-w3ls">
     <h2>登录</h2>
-    <form action="#" method="post">
+    <form  autocomplete="off" #loginForm="ngForm">
       <div class="main">
         <div class="form-left-to-w3l">
-          <input type="text" name="name" placeholder="用户名" required="" [(ngModel)]="userName">
+          <input type="text" name="userName" placeholder="用户名" minlength="2" maxlength="20" required [(ngModel)]="userName">
         </div>
         <div class="form-left-to-w3l ">
-          <input type="password" name="password" placeholder="密码" required="" [(ngModel)]="pwd" (keyup)="enterAction($event)">
+          <input type="password" name="password" placeholder="密码" minlength="6" maxlength="20" required [(ngModel)]="pwd" (keyup)="enterAction($event)">
           <div class="clear"></div>
         </div>
       </div>
@@ -19,9 +19,7 @@
       </div>
       <div class="clear"></div>
       <div class="btnn">
-        <button style="float: left" type="button" pButton
-                (click)="login()"
-                label="登录"></button>
+        <button [disabled]="!loginForm.form.valid" style="float: left" type="button" pButton (click)="login()" label="登录"></button>
       </div>
     </form>
     <div class="w3layouts_more-buttn">
@@ -32,12 +30,12 @@
     </div>
     <!-- register popup-->
     <div id="content1" class="popup-effect" *ngIf="showRegister">
-      <div class="popup" style="margin-top: 80px">
+      <div class="popup" style="margin-top: 20px">
         <!--login form-->
         <div class="letter-w3ls">
           <form #regForm="ngForm" autocomplete="off">
             <div class="form-left-to-w3l" style="height: 60px">
-              <input class="custom-placeholder" type="text" name="userName" placeholder="用户名(必填)长度2-10" required minlength="2" maxlength="10" style="padding: 8px" [(ngModel)]="user.userName">
+              <input class="custom-placeholder" type="text" name="userName" placeholder="用户名(必填)长度2-20" required minlength="2" maxlength="20" style="padding: 8px" [(ngModel)]="user.userName">
             </div>
             <div class="form-left-to-w3l" style="height: 60px">
               <input class="custom-placeholder" type="text" name="userMobile" placeholder="手机号码"  maxlength="11" style="padding: 8px" [(ngModel)]="user.userMobile">
@@ -84,12 +82,12 @@
     <!-- //popup -->
     <!-- forgot password popup-->
     <div id="content2" class="popup-effect" *ngIf="showForgotPassword">
-      <div class="popup" style="margin-top: 80px">
+      <div class="popup" style="margin-top: 20px">
         <!--login form-->
         <div class="letter-w3ls">
           <form #regForgotForm="ngForm" autocomplete="off">
             <div class="form-left-to-w3l" style="height: 60px">
-              <input class="custom-placeholder" type="text" name="userName" placeholder="用户名(必填)长度2-10" required minlength="2" maxlength="10" style="padding: 8px" [(ngModel)]="forgotUser.userName">
+              <input class="custom-placeholder" type="text" name="userName" placeholder="用户名(必填)长度2-20" required minlength="2" maxlength="20" style="padding: 8px" [(ngModel)]="forgotUser.userName">
             </div>
             <div class="form-left-to-w3l" style="height: 60px">
               <input class="custom-placeholder" type="password" name="forgotRegisterPassword" placeholder="新密码(必填)长度6-20" required minlength="6" maxlength="20" style="padding: 8px" [(ngModel)]="forgotRegisterPassword">
@@ -129,4 +127,7 @@
     </div>
     <!-- //popup -->
   </div>
+</div>
+<div style="position: fixed;top: 20px;left: 25px;cursor: pointer" (click)="toHome()">
+  <img src="./assets/img/homepage.png" alt="返回主页" width="40">
 </div>

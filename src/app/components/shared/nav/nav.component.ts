@@ -36,15 +36,15 @@ export class NavComponent implements OnInit {
                private userService: UserService,
                private sessionStorageService: SessionStorageService) { }
 
-
-  toRegister() {
-    this.router.navigate(['/user/register']);
-  }
   toLogin() {
     this.router.navigate(['/user/login']);
   }
 
   logout() {
+    if (!this.sessionStorageService.getAuth('userId')) {
+      this.router.navigate(['/home']);
+      return;
+    }
     this.userService.logout({userId: this.sessionStorageService.getAuth('userId')}).subscribe(res => {
       console.log('logout:', res);
       if (res['success'] === 'true') {
@@ -57,40 +57,45 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isLogin = this.userService.isAuthenticated();
-    this.isManager = this.userService.isManager();
 
-    this.items =  [
-      {
-        label: '首页',
-        routerLink: ['/']
-      },
-      {
-        label: '分类',
-        routerLink: ['/category/0']
-      },
-      {
-        label: '我的书架',
-        routerLink: ['/shelf'],
-        visible: this.userService.isAuthenticated()
-      },
-      {
-        label: '书籍管理',
-        routerLink: ['/sys'],
-        visible: this.isManager
-      },
-      {
-        label: '分类管理',
-        routerLink: ['/sys/category'],
-        visible: this.isManager
-      },
-      {
-        label: '用户管理',
-        routerLink: ['/sys/user'],
-        visible: this.isManager
-      }
-    ];
-
+    // 验证导航退出和登录状态
+    this.userService.checkUser(this.sessionStorageService.getAuth('userId')).subscribe(res => {
+        if (res['success'] === 'true') {
+          this.isLogin = true;
+        } else {
+          this.isLogin = false;
+        }
+      this.isManager =  (this.sessionStorageService.getAuth('userId') === '402880e66fa9c954016fa9e1d36f0002');
+      this.items =  [
+        {
+          label: '首页',
+          routerLink: ['/']
+        },
+        {
+          label: '分类',
+          routerLink: ['/category/0']
+        },
+        {
+          label: '我的书架',
+          routerLink: ['/shelf'],
+        },
+        {
+          label: '书籍管理',
+          routerLink: ['/sys'],
+          visible: this.isManager
+        },
+        {
+          label: '分类管理',
+          routerLink: ['/sys/category'],
+          visible: this.isManager
+        },
+        {
+          label: '用户管理',
+          routerLink: ['/sys/user'],
+          visible: this.isManager
+        }
+      ];
+    });
   }
 
 }

@@ -17,10 +17,13 @@ export class LoginComponent implements OnInit {
   message: Message[] = [];
   showRegister = false;
   showForgotPassword = false;
+  // 登录用户名密码
   userName = '';
   pwd = '';
+  // 注册密码和确认密码
   registerPassword = '';
   confirmPassword = '';
+  // 重置密码和确认密码
   forgotRegisterPassword = '';
   forgotConfirmPassword = '';
   user: User = User.newInstance();
@@ -44,8 +47,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     console.log('questionO', this.questionsOne);
+    if (this.sessionStorageService.getAuth('isa')) {
+      this.router.navigate(['/']);
+    }
   }
 
+  /**
+   * 登录
+   */
   login() {
     this.userService.login({userName: this.userName, pwd: Md5.hashStr(this.pwd)}).subscribe(res => {
       console.log('login-result:', res);
@@ -53,26 +62,33 @@ export class LoginComponent implements OnInit {
         const auth = {
           isa: true,
           userId: res['data'].split(',')[0],
-          token: res['data'].split(',')[1],
           ism: false
         };
         if (res['data'].split(',')[2] === 'manager') {
           auth.ism = true;
         }
         this.sessionStorageService.setAuth(auth);
-        this.router.navigate(['/']);
+        history.go(-1);
+        // this.router.navigate(['/']);
       } else {
         this.message = [{severity: 'error', summary: res['message'] ? res['message'] : '请求失败！'}];
       }
     });
   }
 
+  /**
+   * 回车键快速登录
+   * @param e 键盘事件
+   */
   enterAction(e) {
     if (e.keyCode === 13) {
       this.login();
     }
   }
 
+  /**
+   * 注册
+   */
   register() {
     if (this.registerPassword !== this.confirmPassword) {
       this.message = [{severity: 'error', summary: '两次输入的密码不一致！'}];
@@ -94,6 +110,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**
+   * 忘记密码
+   */
   forgotPassword() {
     if (this.forgotRegisterPassword !== this.forgotConfirmPassword) {
       this.message = [{severity: 'error', summary: '两次输入的密码不一致！'}];
@@ -106,10 +125,17 @@ export class LoginComponent implements OnInit {
         this.showForgotPassword = false;
         this.forgotRegisterPassword = '';
         this.forgotConfirmPassword = '';
-        this.message = [{severity: 'info', summary: '操作成功！'}];
+        this.userName = '';
+        this.pwd = '';
+        this.forgotUser = User.newInstance();
+        this.message = [{severity: 'info', summary: '密码找回成功！'}];
       } else {
         this.message = [{severity: 'error', summary: res['data']}];
       }
+      this.sessionStorageService.clearAuth();
     });
+  }
+  toHome() {
+    this.router.navigate(['/']);
   }
 }

@@ -540,7 +540,7 @@ input.checked {
     margin: 0px 0px 30px;
   }
   .art-right-w3ls {
-    padding-top: 8em;
+    padding: 115px 0px !important;
     margin: 0 auto;
   }
   .art-left-w3ls {
