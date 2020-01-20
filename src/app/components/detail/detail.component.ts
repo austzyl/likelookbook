@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Params, Router} from '@angular/router';
 import {BookService} from '../../common/services/book.service';
 import {EventManager} from '@angular/platform-browser';
+import {SessionStorageService} from '../../common/services/session-storage.service';
+import {Message} from 'primeng/api';
 
 @Component({
   selector: 'app-detail',
@@ -10,52 +12,40 @@ import {EventManager} from '@angular/platform-browser';
 })
 export class DetailComponent implements OnInit {
 
+
   params = {
     currentPage: 0,
     startLine: -1,
-    endLine: 20,
+    endLine: 60, // 初始行数
     flag: '1',
     bookDir: '',
-    bytesCount: 20,
+    bytesCount: 60, // 每页行数
     bookId: ''
 
   };
+  message: Message[] = [];
 
   prePageContent = '';
   nextPageContent = '';
-  isPageModel = false;
+  // 分页读取模式
+  isPageModel = true;
+
+  isShelf = false;
+
+
 
   constructor(private routeInfo: ActivatedRoute,
               private eventManager: EventManager,
+              private sessionStorageService: SessionStorageService,
               private router: Router,
               private bookService: BookService) {
   }
 
   ngOnInit() {
 
+    this.getParams();
     console.log('routeInfo', this.routeInfo);
-    this.routeInfo.params.subscribe((params: Params) => {
-      this.params.bookDir = params['bookDir'];
-      this.params.bookId = params['id'];
-      this.bookService.getContent(this.params).subscribe(data => {
-        console.log('data', data);
-        if (data['success'] === 'true') {
-          this.nextPageContent = data['data']['sw1'];
-          // this.nextPageContent = data['data']['sw2'];
-        }
-      });
-    });
-    // 左右键键盘事件
-    this.eventManager.addGlobalEventListener('window', 'keydown', (event: any) => {
-      console.log('监听到键盘按下事件了', event);
-      console.log('监听到键盘按下事件了', event.keyCode);
-      if (event.keyCode === 37) {
-        // 监听到 上下左右 的键盘按下事件时，调用我自己的rePosition()方法~
-        this.changePage('0');
-      } else if (event.keyCode === 39) {
-        this.changePage('1');
-      }
-    });
+
     /*const tsthis = this;
     /!** This is high-level function.
      * It must react to delta being more/less than zero.
@@ -120,6 +110,51 @@ export class DetailComponent implements OnInit {
 
   }
 
+  getParams() {
+    this.routeInfo.params.subscribe((params: Params) => {
+      this.params.bookDir = params['bookDir'];
+      this.params.bookId = params['id'];
+      // 如果是书架书籍，当前页为书架中保存到页数
+      if (this.sessionStorageService.getAuth('userId')) {
+        this.bookService.getShelfBook(this.sessionStorageService.getAuth('userId'), this.params.bookId).subscribe(res => {
+          if (res['success'] === 'true') {
+            if (res['data'] !== null) {
+              this.isShelf = true;
+              this.params.currentPage = res['data']['readPage'] - 1;
+            }
+            this.getContent();
+          }
+        });
+      } else {
+        this.getContent();
+      }
+    });
+  }
+
+  getContent() {
+    this.bookService.getContent(this.params).subscribe(data => {
+      console.log('getContent', data);
+      if (data['success'] === 'true') {
+        this.leftOrRightListener();
+        this.nextPageContent = data['data']['sw1'];
+        console.log('this.currentPage:', this.params.currentPage);
+        // this.nextPageContent = data['data']['sw2'];
+      }
+    });
+  }
+
+  leftOrRightListener() {
+    // 左右键键盘事件
+    this.eventManager.addGlobalEventListener('window', 'keydown', (event: any) => {
+      if (event.keyCode === 37) {
+        // 监听到 上下左右 的键盘按下事件时，调用我自己的rePosition()方法~
+        this.changePage('0');
+      } else if (event.keyCode === 39) {
+        this.changePage('1');
+      }
+    });
+  }
+
   changePage(flag) {
     if (flag === '0') {
       if (this.params.currentPage > 0) {
@@ -144,6 +179,7 @@ export class DetailComponent implements OnInit {
           return;
         }
         this.nextPageContent = data['data']['sw1'];
+        this.toTop();
         // this.nextPageContent = data['data']['sw2'];
 
       }
@@ -154,7 +190,7 @@ export class DetailComponent implements OnInit {
    * 阅读界面全屏显示
    *
    */
-  fullscreen(elem: any = document.getElementById('bookcontent')): void {
+  fullscreen(elem: any = document.getElementsByTagName('html')[0]): void {
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
       const docElm = elem;
       if (docElm.requestFullscreen) {
@@ -175,7 +211,33 @@ export class DetailComponent implements OnInit {
     }
   }
 
+
   goBack() {
     history.go(-1);
+  }
+
+  toTop() {
+    const elementsByName = document.getElementsByTagName('html')[0];
+    elementsByName.scrollTop = 0;
+  }
+
+  /**
+   * 加入书架
+   */
+  addToShelf() {
+    const userId = this.sessionStorageService.getAuth('userId');
+    if (!userId) {
+      this.message = [{severity: 'info', summary: '请先登录！'}];
+      return;
+    } else {
+      this.bookService.saveToShelf(userId, this.params.bookId, this.params.currentPage + 1).subscribe(res => {
+        if (res['success'] === 'true') {
+          this.message = [{severity: 'info', summary: '添加成功！'}];
+          this.isShelf = true;
+        } else {
+          this.message = [{severity: 'error', summary: res['message'] ? res['message'] : '请求失败！'}];
+        }
+      });
+    }
   }
 }

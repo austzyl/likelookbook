@@ -63,8 +63,17 @@ export class BookService {
     const url = '/yunqi/collect/' + userId + '/' + bookId;
     return this.http.post(url, null);
   }
+
+  /**
+   * 获取首页滚动图片书籍
+   */
   getScrollBooks() {
     const url = '/yunqi/book/booksbyname';
+    return this.http.get(url, {});
+  }
+
+  getShelfBook(userId, bookId) {
+    const url = '/yunqi/collect/bookCollect/' + userId + '/' + bookId;
     return this.http.get(url, {});
   }
 }

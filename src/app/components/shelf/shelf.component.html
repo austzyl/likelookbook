@@ -9,7 +9,13 @@
     <span class="support-note"></span>
   </header>
   <div class="main">
-    <ul id="bk-list" class="bk-list clearfix">
+    <div class="book-shelf-left" (click)="previousPage()" *ngIf="this.pages > 1">
+      <img src="assets/img/left.png" alt="" width="60px">
+    </div>
+    <div class="book-shelf-right" (click)="nextPage()" *ngIf="this.pages > 1">
+      <img src="assets/img/right.png" alt="" width="60px">
+    </div>
+    <ul id="bk-list" class="bk-list clearfix" >
       <li *ngFor="let book of books;let i=index">
         <a class="bk-book book-{{i+1}}" [routerLink]="['/detail',book.bookDir,book.bookId]">
           <div class="bk-front">
@@ -34,6 +40,7 @@
         <div title="移除" class="book-shelf-remove" (click)="remove(book.userId,book.bookId)">x</div>
       </li>
     </ul>
+
     <div class="bookshelf" ></div>
   </div>
 </div><!-- /container -->

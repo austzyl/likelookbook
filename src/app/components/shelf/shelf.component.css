@@ -162,14 +162,15 @@ a {
 .bk-list {
   list-style: none;
   position: relative;
-  width: 533px; /* 13 books * 40px + 13 books * margin (1px) */
+  width: 543px; /* 13 books * 40px + 13 books * margin (1px) */
   margin: 0 auto;
+  padding-left: 73px !important;
   -webkit-perspective: 1800px;
   -moz-perspective: 1800px;
   perspective: 1800px;
-  -webkit-perspective-origin: 77% 4%;
-  -moz-perspective-origin: 77% 4%;
-  perspective-origin: 77% 4%;
+  -webkit-perspective-origin: 80% 4%;
+  -moz-perspective-origin: 80% 4%;
+  perspective-origin: 80% 4%;
 }
 
 .bk-list li {
@@ -779,4 +780,20 @@ a {
   font-size: 20px;
   font-weight: bold;
   color: #fff;
+}
+.book-shelf-left {
+  height: 54px;
+  width: 60px;
+  position: absolute;
+  left: 80px;
+  cursor: pointer;
+  top: 150px;
+}
+.book-shelf-right {
+  height: 54px;
+  width: 60px;
+  position: absolute;
+  cursor: pointer;
+  right: 80px;
+  top: 150px;
 }

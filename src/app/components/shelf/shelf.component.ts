@@ -23,6 +23,7 @@ export class ShelfComponent implements OnInit {
     page: 0,
     size: 10
   };
+  pages = 0;
 
   constructor(private userService: UserService,
               private sessionStorageService: SessionStorageService,
@@ -53,6 +54,8 @@ export class ShelfComponent implements OnInit {
       console.log('获取用户书架', res);
       if (res['success'] === 'true') {
         this.books = res['data'];
+        this.pages = Math.ceil(res['total'] / 10);
+        console.log('aaaa', this.pages);
       } else {
         this.message = [{severity: 'error', summary: res['message'] ? res['message'] : '请求失败！'}];
       }
@@ -73,5 +76,22 @@ export class ShelfComponent implements OnInit {
       }
 
     });
+  }
+  previousPage() {
+    if (this.params.page === 0 || this.pages === 0) {
+      return;
+    }
+    this.params.page -= 1;
+    console.log('this.params:', this.params);
+    this.getShelfBooks();
+  }
+
+  nextPage() {
+    if (this.params.page === this.pages - 1 || this.pages === 0) {
+      return;
+    }
+    this.params.page += 1;
+    console.log('this.params:', this.params);
+    this.getShelfBooks();
   }
 }

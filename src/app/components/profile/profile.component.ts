@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       this.message = [{severity: 'info', summary: '请先登录！'}];
       return;
     } else {
-      this.bookService.saveToShelf(userId, this.bookId, 0).subscribe(res => {
+      this.bookService.saveToShelf(userId, this.bookId, 1).subscribe(res => {
         if (res['success'] === 'true') {
           this.message = [{severity: 'info', summary: '添加成功！'}];
         } else {

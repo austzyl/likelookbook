@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
     this.getRecommends();
     this.getScrollBooks();
     this.images = [];
+    // 滚动图片
     for (let i = 0; i < 12; i++) {
       this.images.push({
         source: 'assets/showcase/images/demo/galleria/galleria' + i + '.jpg',
@@ -46,6 +47,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /**
+   * 滚动图片点击事件
+   * @param event 事件对象
+   */
   clickImage(event) {
     console.log('event:', event);
     this.router.navigate(['/profile', this.scrollBooks[event.index].id]);
@@ -55,6 +60,9 @@ export class HomeComponent implements OnInit {
     this.oTitle = e.index + 1;
   }
 
+  /**
+   * 获取分类信息和旗下的前十发布时间的书籍
+   */
   getCateBooks() {
     this.bookService.books().subscribe(data => {
       console.log('d', data);
@@ -64,6 +72,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * 获取分类
+   */
   getCategories() {
     this.cateService.categories('0', 0, 9).subscribe(data => {
       console.log('data', data);
@@ -73,6 +84,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * 获取推荐信息
+   */
   getRecommends() {
     this.bookService.getBooksRankings().subscribe(data => {
 
@@ -83,6 +97,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * 获取首页展示的滚动书籍信息
+   */
   getScrollBooks() {
     this.bookService.getScrollBooks().subscribe(data => {
       if (data['success'] === 'true') {

@@ -1,40 +1,57 @@
-<div class="ui-g" style="height: 100%" id="bookcontent" *ngIf="isPageModel">
+<p-growl [(value)]="message" life="2000"></p-growl>
+<div  class="ui-g" id="bookContent1" *ngIf="!isPageModel">
   <div class="ui-g-12 detail-content">
     <div class="ui-g-6 detail-left detail-left-right" (click)="changePage('0')">
       <pre class="detail-pagecontent">
         {{prePageContent}}
       </pre>
-      <div class="ui-g-12 ui-g-nopad"  style="text-align: center">
-       {{params.currentPage}}
+      <div class="ui-g-12 ui-g-nopad" style="text-align: center">
+        {{params.currentPage}}
       </div>
     </div>
     <div class="ui-g-6 detail-right detail-left-right" (click)="changePage('1')">
       <pre class="detail-pagecontent">
         {{nextPageContent}}
       </pre>
-      <div class="ui-g-12 ui-g-nopad"  style="text-align: center">
+      <div class="ui-g-12 ui-g-nopad" style="text-align: center">
         {{params.currentPage + 1}}
       </div>
     </div>
   </div>
 </div>
-<div class="ui-g" style="height: 100%;width: 1000px;margin: 0 auto"  *ngIf="!isPageModel">
-  <div class="ui-g-12" style="margin:0 auto;width:800px;font-size: 28px;line-height: 1.8;background-color: #dbd6c9;height: 835px;">
+<div class="ui-g" id="bookContent2" style="width: 1000px;margin: 0 auto" *ngIf="isPageModel">
+  <div class="ui-g-12" style="margin:0 auto;width:800px;font-size: 28px;line-height: 1.8;background-color: #dbd6c9;">
      <pre class="detail-pagecontent">
        {{nextPageContent}}
      </pre>
-    <div class="ui-g-12 ui-g-nopad"  style="text-align: center;position: relative; bottom: 817px;width: 27px;float: right;font-size: 17px">
+    <div class="ui-g-12 ui-g-nopad"
+         style="text-align: center;position: relative; bottom: 19px;width: 27px;float: right;font-size: 17px">
       {{params.currentPage + 1}}
     </div>
   </div>
+  <div class="ui-g" style="position:fixed;width: 100px;top: 8px;right: 8px">
+    <!--  <div class="ui-g-12 ui-g-nopad"
+           style="height: 40px;background-color: #5a554e8c;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
+           (click)="fullscreen()"><h2>全屏</h2></div>-->
+    <!--<div class="ui-g-12 ui-g-nopad"
+         style="height: 40px;background-color: #a7b0b5c4;text-align: center;padding: 6px;cursor: pointer;"
+         (click)="isPageModel = !isPageModel"><h2>反馈</h2></div>-->
+    <div class="ui-g-12 ui-g-nopad"
+         style="height: 40px;background-color: #5a554e8c;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
+         (click)="fullscreen()"><h2>全屏</h2></div>
+    <div class="ui-g-12 ui-g-nopad" *ngIf="!isShelf"
+         style="height: 40px;background-color: #c4d0c9c4;text-align: center;padding: 6px;cursor:pointer;border-radius: 20px;margin-top: 10px;" (click)="addToShelf()">
+      <h2>加入书架</h2>
+    </div>
+    <div class="ui-g-12 ui-g-nopad"
+         style="height: 40px;background-color: #62f1188c;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
+         (click)="changePage('0')"><h2>上一页</h2></div>
+    <div class="ui-g-12 ui-g-nopad"
+         style="height: 40px;background-color: #0ba3f8c4;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
+         (click)="changePage('1')"><h2>下一页</h2></div>
+  </div>
+  <a style="position: fixed;top: 20px;left: 25px;cursor: pointer" (click)="goBack()">
+    <img src="./assets/img/homepage.png" alt="返回主页" width="40">
+  </a>
 </div>
-<div class="ui-g" style="position:fixed;width: 100px;top: 8px;right: 8px">
-<!--  <div class="ui-g-12 ui-g-nopad" style="height: 40px;background-color: #5a554e8c;text-align: center;padding: 6px;cursor: pointer" (click)="fullscreen()"><h2>全屏</h2></div>
-  <div class="ui-g-12 ui-g-nopad" style="height: 40px;background-color: #a7b0b5c4;text-align: center;padding: 6px;cursor: pointer;" (click)="isPageModel = !isPageModel"><h2>反馈</h2></div>
-  <div class="ui-g-12 ui-g-nopad" style="height: 40px;background-color: #c4d0c9c4;text-align: center;padding: 6px;cursor:pointer;"><h2>收藏</h2></div>-->
-  <div class="ui-g-12 ui-g-nopad" style="height: 40px;background-color: #62f1188c;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;" (click)="changePage('0')"><h2>上一页</h2></div>
-  <div class="ui-g-12 ui-g-nopad" style="height: 40px;background-color: #0ba3f8c4;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;" (click)="changePage('1')"><h2>下一页</h2></div>
-</div>
-<a style="position: fixed;top: 20px;left: 25px;cursor: pointer" (click)="goBack()">
-  <img src="./assets/img/homepage.png" alt="返回主页" width="40">
-</a>
+
