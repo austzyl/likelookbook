@@ -1,6 +1,68 @@
 <div class="header">
   <app-nav></app-nav>
 </div>
-<p>
-  user component init!
-</p>
+<div class="ui-g ui-g-nopad">
+  <div class="ui-g-12 ui-g-nopad">
+
+  </div>
+  <div>
+    <div style="background: #fff;">
+      <p-table
+        [value]="users"
+        [columns]="cols"
+        [rows]="10"
+        [(selection)]="selectedUser"
+        [lazy]="true"
+        [paginator]="true"
+        [scrollable]="true"
+        [scrollHeight]="scrollHeight"
+        [totalRecords]="totalRecords"
+        (onLazyLoad)="pageChange($event)"
+        [first]="first"
+      >
+        <ng-template pTemplate="caption">
+          <div class="ui-g">
+            <div class="ui-g-12 ui-g-nopad">
+              <div class="ui-g-4 ui-g-nopad">
+
+              </div>
+              <div class="ui-g-8 ui-g-nopad" style="float: right;">
+                <label for="userName">用户名：</label>
+                <input (keyup)="enterQuery($event)" id="userName" type="text" [(ngModel)]="params.userName" name="userName"
+                       pInputText>
+                <!--<label for="bookAuthor">作者：</label>
+                <input id="bookAuthor" type="text" pInputText [(ngModel)]="param.bookAuthor" name="bookAuthor">-->
+                <button style="float: right" type="button" pButton icon="fa fa-search" (click)="userList()"
+                        label="查询"></button>
+                <button style="float: right;margin-right: 5px" type="button" pButton icon="fa fa-check" (click)="reset()"
+                        label="重置"></button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th style="width: 70px">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+
+            <th *ngFor="let col of columns" title="{{col.header}}">
+              {{col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+          <tr [pSelectableRow]="rowData">
+            <td style="width: 70px;text-align: center">
+              <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
+            <td *ngFor="let col of columns" title="{{rowData[col.field]}}">
+              {{rowData[col.field]}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+  </div>
+</div>

@@ -18,9 +18,13 @@
       [columns]="cols"
       [rows]="10"
       [(selection)]="selectedBook"
+      [lazy]="true"
       [paginator]="true"
       [scrollable]="true"
       [scrollHeight]="scrollHeight"
+      [totalRecords]="totalRecords"
+      (onLazyLoad)="pageChange($event)"
+      [first]="first"
     >
       <ng-template pTemplate="caption">
         <div class="ui-g">

@@ -16,10 +16,10 @@ export class DetailComponent implements OnInit {
   params = {
     currentPage: 0,
     startLine: -1,
-    endLine: 60, // 初始行数
+    endLine: 120, // 初始行数
     flag: '1',
     bookDir: '',
-    bytesCount: 60, // 每页行数
+    bytesCount: 120, // 每页行数
     bookId: ''
 
   };
@@ -137,6 +137,9 @@ export class DetailComponent implements OnInit {
       if (data['success'] === 'true') {
         this.leftOrRightListener();
         this.nextPageContent = data['data']['sw1'];
+        if (!this.nextPageContent) {
+          this.params.currentPage = 0;
+        }
         console.log('this.currentPage:', this.params.currentPage);
         // this.nextPageContent = data['data']['sw2'];
       }
@@ -239,5 +242,16 @@ export class DetailComponent implements OnInit {
         }
       });
     }
+  }
+  jump(page) {
+    if (page < 1) {
+      this.message = [{severity: 'info', summary: '请输入大于0的跳转页数'}];
+      return;
+    }
+    this.params.currentPage = page - 1;
+    this.params.startLine = this.params.currentPage * this.params.bytesCount - 1;
+    this.params.endLine = this.params.currentPage * this.params.bytesCount + this.params.bytesCount;
+    this.getContent();
+    this.toTop();
   }
 }

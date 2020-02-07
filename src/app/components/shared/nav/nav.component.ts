@@ -32,9 +32,11 @@ export class NavComponent implements OnInit {
   logoutEvent: EventEmitter<any> = new EventEmitter();
   isLogin = false;
   isManager = false;
+
   constructor(private router: Router,
-               private userService: UserService,
-               private sessionStorageService: SessionStorageService) { }
+              private userService: UserService,
+              private sessionStorageService: SessionStorageService) {
+  }
 
   toLogin() {
     this.router.navigate(['/user/login']);
@@ -60,13 +62,13 @@ export class NavComponent implements OnInit {
 
     // 验证导航退出和登录状态
     this.userService.checkUser(this.sessionStorageService.getAuth('userId')).subscribe(res => {
-        if (res['success'] === 'true') {
-          this.isLogin = true;
-        } else {
-          this.isLogin = false;
-        }
-      this.isManager =  (this.sessionStorageService.getAuth('userId') === '402880e66fa9c954016fa9e1d36f0002');
-      this.items =  [
+      if (res['success'] === 'true') {
+        this.isLogin = true;
+      } else {
+        this.isLogin = false;
+      }
+      this.isManager = (this.sessionStorageService.getAuth('userId') === '402880e66fa9c954016fa9e1d36f0002');
+      this.items = [
         {
           label: '首页',
           routerLink: ['/']
@@ -99,6 +101,7 @@ export class NavComponent implements OnInit {
   }
 
 }
+
 @NgModule({
   imports: [
     CommonModule,
@@ -110,4 +113,5 @@ export class NavComponent implements OnInit {
     NavComponent
   ]
 })
-export class NavModule { }
+export class NavModule {
+}

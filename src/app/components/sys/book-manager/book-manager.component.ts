@@ -29,6 +29,9 @@ export class BookManagerComponent implements OnInit, AfterViewInit {
   showAddEdit = false;
   editItem: BookItem = null;
 
+  totalRecords = 0;
+  first = 0;
+
   constructor(private bookService: BookService,
               private categoryService: CategoryService,
               private el: ElementRef,
@@ -46,7 +49,14 @@ export class BookManagerComponent implements OnInit, AfterViewInit {
     this.bookService.getBookManagerList(this.param).subscribe((data) => {
       console.log('data', data);
       this.books = data['data'];
+      this.totalRecords = data['total'];
     });
+  }
+  pageChange(e) {
+    console.log('e', e);
+    this.param.page = e.first / this.param.size;
+    this.first = e.first;
+    this.queryBooks();
   }
 
   getTree() {
@@ -69,6 +79,7 @@ export class BookManagerComponent implements OnInit, AfterViewInit {
     console.log('node:', node);
     node.node.expanded = !node.node.expanded;
     this.param.cateCode = node.node.type;
+    this.param.page = 0;
     this.queryBooks();
   }
 
@@ -158,7 +169,6 @@ export class BookManagerComponent implements OnInit, AfterViewInit {
     this.scrollHeight = (document.documentElement.clientHeight - 242) + 'px';
     // this.el.nativeElement.querySelector('.ui-table-scrollable-body').style.height = this.scrollHeight;
     this.renderer2.setStyle(this.el.nativeElement.querySelector('.ui-table-scrollable-body'), 'height', this.scrollHeight);
-
     this.renderer2.setStyle(this.el.nativeElement.querySelector('.ui-tree'), 'height', (document.documentElement.clientHeight - 122) + 'px');
   }
 }

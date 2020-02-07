@@ -14,4 +14,10 @@ export const CATEGORY_COLS = [
   {header: '分类编码', field: 'cateCode'},
   {header: '分类目录', field: 'cateDir'}
 ];
+export const USER_COLS = [
+  {header: '用户名', field: 'userName'},
+  {header: '手机', field: 'userMobile'},
+  {header: '邮箱', field: 'userEmail'},
+  {header: '创建时间', field: 'userCreateTime'}
+];
 

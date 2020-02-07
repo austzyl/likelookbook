@@ -37,21 +37,34 @@
          style="height: 40px;background-color: #a7b0b5c4;text-align: center;padding: 6px;cursor: pointer;"
          (click)="isPageModel = !isPageModel"><h2>反馈</h2></div>-->
     <div class="ui-g-12 ui-g-nopad"
-         style="height: 40px;background-color: #5a554e8c;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
-         (click)="fullscreen()"><h2>全屏</h2></div>
-    <div class="ui-g-12 ui-g-nopad" *ngIf="!isShelf"
-         style="height: 40px;background-color: #c4d0c9c4;text-align: center;padding: 6px;cursor:pointer;border-radius: 20px;margin-top: 10px;" (click)="addToShelf()">
-      <h2>加入书架</h2>
+         style="font-size: 18px;color:#2cff51;height: 40px;background-color: #945305;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
+         (click)="fullscreen()">全屏</div>
+    <div class="ui-g-12 ui-g-nopad" *ngIf="!isShelf" title="登录后可添加"
+         style="font-size: 18px;color: #bd250e;height: 40px;background-color: #BD6B09;text-align: center;padding: 6px;cursor:pointer;border-radius: 20px;margin-top: 10px;" (click)="addToShelf()">
+      加入书架
     </div>
     <div class="ui-g-12 ui-g-nopad"
-         style="height: 40px;background-color: #62f1188c;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
-         (click)="changePage('0')"><h2>上一页</h2></div>
+         style="height: 40px;background-color: #EC870E;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
+         (click)="changePage('0')" title="上一页，键盘方向左键"><img src="./assets/img/previous.png" style="width: 55px;
+    height: 64px;
+    position: relative;
+    bottom: 19px;"></div>
     <div class="ui-g-12 ui-g-nopad"
-         style="height: 40px;background-color: #0ba3f8c4;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
-         (click)="changePage('1')"><h2>下一页</h2></div>
+         style="height: 40px;background-color: #F5B16D;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
+         (click)="changePage('1')" title="下一页，键盘方向右键"><img src="./assets/img/next.png" style="width: 55px;
+    height: 64px;
+    position: relative;
+    bottom: 16px;"></div>
+    <div class="ui-g-12 ui-g-nopad"  style="height: 40px;background-color:#FACE9C;text-align: center;padding: 8px;border-radius: 20px;margin-top: 10px;">
+      <input type="number" style="border: 1px solid darkolivegreen;height: 22px;background-color: cornsilk;width: 50px;padding-left: 6px;border-radius: 10px;" #jumpPage >
+      <span (click)="jump(jumpPage.value)" style="cursor: pointer;font-weight: bold" title="请输入需要跳转的页码！">&nbsp;跳转</span>
+    </div>
   </div>
-  <a style="position: fixed;top: 20px;left: 25px;cursor: pointer" (click)="goBack()">
-    <img src="./assets/img/homepage.png" alt="返回主页" width="40">
+  <a style="position: fixed;top: 20px;left: 25px;cursor: pointer" [routerLink]="['/']" title="返回首页">
+    <img src="./assets/img/home.png" alt="首页" width="40">
+  </a>
+  <a style="position: fixed;top: 20px;left: 75px;cursor: pointer" (click)="goBack()" title="返回上一页">
+    <img src="./assets/img/homepage.png" alt="返回" width="40">
   </a>
 </div>
 
