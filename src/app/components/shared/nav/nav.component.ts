@@ -74,7 +74,7 @@ export class NavComponent implements OnInit {
           routerLink: ['/']
         },
         {
-          label: '分类',
+          label: '找书',
           routerLink: ['/category/0']
         },
         {
@@ -95,7 +95,11 @@ export class NavComponent implements OnInit {
           label: '用户管理',
           routerLink: ['/sys/user'],
           visible: this.isManager
-        }
+        },
+        {
+          label: '建议反馈',
+          routerLink: ['/suggest']
+        },
       ];
     });
   }

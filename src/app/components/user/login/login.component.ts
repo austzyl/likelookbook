@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Md5} from 'ts-md5';
 import {User} from '../../../common/enties/User';
 import {UserService} from '../../../common/services/user.service';
@@ -6,13 +6,14 @@ import {SessionStorageService} from '../../../common/services/session-storage.se
 import {Router} from '@angular/router';
 import {Message} from 'primeng/api';
 import {DropdownLabelValue} from '../../../common/enties/DropdownLabelValue';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   message: Message[] = [];
   showRegister = false;
@@ -137,5 +138,7 @@ export class LoginComponent implements OnInit {
   }
   toHome() {
     this.router.navigate(['/']);
+  }
+  ngAfterViewInit() {
   }
 }

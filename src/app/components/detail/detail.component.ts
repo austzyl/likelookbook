@@ -4,6 +4,7 @@ import {BookService} from '../../common/services/book.service';
 import {EventManager} from '@angular/platform-browser';
 import {SessionStorageService} from '../../common/services/session-storage.service';
 import {Message} from 'primeng/api';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
   selector: 'app-detail',
@@ -32,7 +33,12 @@ export class DetailComponent implements OnInit {
 
   isShelf = false;
 
-
+  backGround = '#dfdfdf';
+  selectPageColor = false;
+  showOptMenu = true;
+  fontFamily = 'serif';
+  selectFontFamily = false;
+  backGroundImage = false;
 
   constructor(private routeInfo: ActivatedRoute,
               private eventManager: EventManager,
@@ -214,6 +220,10 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  changeColor() {
+    this.selectPageColor = true;
+  }
+
 
   goBack() {
     history.go(-1);
@@ -243,6 +253,7 @@ export class DetailComponent implements OnInit {
       });
     }
   }
+
   jump(page) {
     if (page < 1) {
       this.message = [{severity: 'info', summary: '请输入大于0的跳转页数'}];
@@ -253,5 +264,28 @@ export class DetailComponent implements OnInit {
     this.params.endLine = this.params.currentPage * this.params.bytesCount + this.params.bytesCount;
     this.getContent();
     this.toTop();
+  }
+
+  jumpChange(e) {
+    if (e.target.value < 1) {
+      e.target.value = 1;
+    }
+  }
+
+  selectColor(color) {
+    if (color) {
+      this.backGroundImage = false;
+      this.backGround = color;
+    } else {
+      this.backGroundImage = true;
+    }
+  }
+
+  changeFontFamily() {
+    this.selectFontFamily = true;
+  }
+
+  selectFont(s: string) {
+    this.fontFamily = s;
   }
 }

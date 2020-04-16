@@ -50,6 +50,11 @@ export const APPROUTES = [
     path: 'user',
     loadChildren: './components/user/user.module#UserModule',
     data: {preload: true}
+  },
+  {
+    path: 'suggest',
+    loadChildren: './components/suggest/suggest.module#SuggestModule',
+    data: {preload: true}
   }
   ];
 

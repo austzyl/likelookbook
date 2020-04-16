@@ -1,6 +1,7 @@
 body {
   overflow: hidden;
 }
+
 .detail-content {
   /*height: 100%;*/
   line-height: 1.8;
@@ -10,6 +11,7 @@ body {
   -webkit-box-shadow: 14px 19px 15px rgba(150, 132, 91, 0.45);
   box-shadow: 14px 19px 15px rgba(150, 132, 91, 0.45);
 }
+
 .detail-left-right {
   height: 100%;
   background-color: aliceblue;
@@ -19,18 +21,22 @@ body {
   transition: all 0.8s ease;
   cursor: pointer;
 }
+
 .detail-left {
   border-right: 2px solid rosybrown;
 }
+
 .detail-right {
   border-left: 2px solid rosybrown;
 }
+
 .detail-right:focus {
 
   -webkit-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
 
 }
+
 .detail-pagecontent {
   padding-left: 25px;
   padding-top: 30px;
@@ -38,4 +44,81 @@ body {
   overflow: hidden;
   white-space: pre-line;
   font-size: 18px;
+}
+
+.detail-page {
+  margin: 0 auto;
+  width: 800px;
+  font-size: 28px;
+  line-height: 1.8;
+  background-color: #dbd6c9;
+}
+
+.change-color {
+  width: 212px;
+  display: flex;
+  height: 40px;
+  position: fixed;
+  right: 119px;
+  top: 49px;
+}
+.change-font {
+  width: 212px;
+  display: flex;
+  height: 40px;
+  position: fixed;
+  right: 119px;
+  top: 88px;
+  box-shadow: 4px 4px 8px rgba(81, 7, 7, 0.61);
+}
+
+.opt-title {
+  height: 40px;
+  background-color: #301717f2;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 1px solid #59592a;
+}
+
+.opt-title-content {
+  color: #c2945b;
+  line-height: 40px;
+  font-size: 18px;
+}
+.opt-title-hidden {
+  height: 280px;
+  position: fixed;
+  background-color: #301717f2;
+  width: 13px;
+  cursor: pointer;
+  top: 8px;
+  right: 12px;
+}
+.opt-title-hidden-icon-right {
+  line-height: 280px;
+  text-align: center;
+  color: #e7cece;
+  font-weight: bold;
+  padding-left: 1px;
+}
+.opt-title-hidden-icon-left {
+  line-height: 280px;
+  text-align: left;
+  color: #e7cece;
+  font-weight: bold;
+  position: relative;
+  right: 4px;
+}
+
+.change-font-content {
+  text-align: center;
+  font-size: 21px;
+  line-height: 16px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.back-dark {
+  background: url("../../../assets/img/back.png") repeat;
+  color: #a1a4a6;
 }

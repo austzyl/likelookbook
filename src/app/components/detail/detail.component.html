@@ -1,5 +1,5 @@
 <p-growl [(value)]="message" life="2000"></p-growl>
-<div  class="ui-g" id="bookContent1" *ngIf="!isPageModel">
+<div class="ui-g" id="bookContent1" *ngIf="!isPageModel">
   <div class="ui-g-12 detail-content">
     <div class="ui-g-6 detail-left detail-left-right" (click)="changePage('0')">
       <pre class="detail-pagecontent">
@@ -19,9 +19,10 @@
     </div>
   </div>
 </div>
-<div class="ui-g" id="bookContent2" style="width: 1000px;margin: 0 auto" *ngIf="isPageModel">
-  <div class="ui-g-12" style="margin:0 auto;width:800px;font-size: 28px;line-height: 1.8;background-color: #dbd6c9;">
-     <pre class="detail-pagecontent">
+<div class="ui-g" id="bookContent2" style="width: 1000px;margin: 0 auto;height: 100%;" *ngIf="isPageModel">
+  <div class="ui-g-12 detail-page"
+       [ngClass]="{'back-dark': backGroundImage}" [ngStyle]="{'background-color': backGround}">
+     <pre class="detail-pagecontent" [ngStyle]="{fontFamily: fontFamily}">
        {{nextPageContent}}
      </pre>
     <div class="ui-g-12 ui-g-nopad"
@@ -29,36 +30,45 @@
       {{params.currentPage + 1}}
     </div>
   </div>
-  <div class="ui-g" style="position:fixed;width: 100px;top: 8px;right: 8px">
+  <div class="ui-g" style="position:fixed;width: 110px;top: 8px;right: 8px" *ngIf="showOptMenu">
     <!--  <div class="ui-g-12 ui-g-nopad"
            style="height: 40px;background-color: #5a554e8c;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
            (click)="fullscreen()"><h2>全屏</h2></div>-->
     <!--<div class="ui-g-12 ui-g-nopad"
          style="height: 40px;background-color: #a7b0b5c4;text-align: center;padding: 6px;cursor: pointer;"
          (click)="isPageModel = !isPageModel"><h2>反馈</h2></div>-->
-    <div class="ui-g-12 ui-g-nopad"
-         style="font-size: 18px;color:#2cff51;height: 40px;background-color: #945305;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
-         (click)="fullscreen()">全屏</div>
-    <div class="ui-g-12 ui-g-nopad" *ngIf="!isShelf" title="登录后可添加"
-         style="font-size: 18px;color: #bd250e;height: 40px;background-color: #BD6B09;text-align: center;padding: 6px;cursor:pointer;border-radius: 20px;margin-top: 10px;" (click)="addToShelf()">
-      加入书架
+    <div class="ui-g-10 ui-g-nopad opt-title"
+         (click)="fullscreen()"><span class="opt-title-content">全&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;屏</span>
     </div>
-    <div class="ui-g-12 ui-g-nopad"
-         style="height: 40px;background-color: #EC870E;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
-         (click)="changePage('0')" title="上一页，键盘方向左键"><img src="./assets/img/previous.png" style="width: 55px;
-    height: 64px;
-    position: relative;
-    bottom: 19px;"></div>
-    <div class="ui-g-12 ui-g-nopad"
-         style="height: 40px;background-color: #F5B16D;text-align: center;padding: 6px;cursor: pointer;border-radius: 20px;margin-top: 10px;"
-         (click)="changePage('1')" title="下一页，键盘方向右键"><img src="./assets/img/next.png" style="width: 55px;
-    height: 64px;
-    position: relative;
-    bottom: 16px;"></div>
-    <div class="ui-g-12 ui-g-nopad"  style="height: 40px;background-color:#FACE9C;text-align: center;padding: 8px;border-radius: 20px;margin-top: 10px;">
-      <input type="number" style="border: 1px solid darkolivegreen;height: 22px;background-color: cornsilk;width: 50px;padding-left: 6px;border-radius: 10px;" #jumpPage >
-      <span (click)="jump(jumpPage.value)" style="cursor: pointer;font-weight: bold" title="请输入需要跳转的页码！">&nbsp;跳转</span>
+    <div class="ui-g-10 ui-g-nopad opt-title"
+         (click)="changeColor()"><span class="opt-title-content">纸张颜色</span></div>
+    <div class="ui-g-10 ui-g-nopad opt-title"
+         (click)="changeFontFamily()"><span class="opt-title-content">更换字体</span></div>
+    <div class="ui-g-10 ui-g-nopad opt-title" *ngIf="!isShelf" title="登录后可添加" (click)="addToShelf()">
+      <span class="opt-title-content">加入书架</span>
     </div>
+    <div class="ui-g-10 ui-g-nopad opt-title" *ngIf="isShelf" title="已收藏" style="cursor: auto;">
+      <span class="opt-title-content" style="color: #8d6bba">已&nbsp;收&nbsp;藏</span>
+    </div>
+    <div class="ui-g-10 ui-g-nopad opt-title"
+         (click)="changePage('0')" title="上一页，键盘方向左键">
+      <img src="./assets/img/previous.png" style="width: 55px;height: 40px;">
+    </div>
+    <div class="ui-g-10 ui-g-nopad opt-title"
+         (click)="changePage('1')" title="下一页，键盘方向右键">
+      <img src="./assets/img/next.png" style="width: 55px;height: 40px;position: relative;">
+    </div>
+    <div class="ui-g-10 ui-g-nopad opt-title">
+      <input type="number" (change)="jumpChange($event)"
+             style="border: 1px solid darkolivegreen;height: 22px;background-color: cornsilk;width: 50px;padding-left: 6px;border-radius: 10px;"
+             #jumpPage>
+      <span (click)="jump(jumpPage.value)" style="line-height: 40px; cursor: pointer;color: #c2945b"
+            title="请输入需要跳转的页码！">&nbsp;跳转</span>
+    </div>
+  </div>
+  <div class="opt-title-hidden" (click)="showOptMenu=!showOptMenu">
+    <span class="opt-title-hidden-icon-right" *ngIf="showOptMenu">》</span>
+    <span class="opt-title-hidden-icon-left" *ngIf="!showOptMenu">《</span>
   </div>
   <a style="position: fixed;top: 20px;left: 25px;cursor: pointer" [routerLink]="['/']" title="返回首页">
     <img src="./assets/img/home.png" alt="首页" width="40">
@@ -66,5 +76,25 @@
   <a style="position: fixed;top: 20px;left: 75px;cursor: pointer" (click)="goBack()" title="返回上一页">
     <img src="./assets/img/homepage.png" alt="返回" width="40">
   </a>
+  <div class="change-color" *ngIf="selectPageColor" (mouseleave)="selectPageColor = false">
+    <div class="ui-g-12" style="height: 40px;background-color: #FFFAFA;cursor: pointer"
+         (click)="selectColor('#FFFAFA')"></div>
+    <div class="ui-g-12" style="height: 40px;background-color: #EEEED1;cursor: pointer"
+         (click)="selectColor('#EEEED1')"></div>
+    <div class="ui-g-12" style="height: 40px;background-color: #c6dfb0;cursor: pointer"
+         (click)="selectColor('#c6dfb0')"></div>
+    <div class="ui-g-12" style="height: 40px;background-color: #FFE4E1;cursor: pointer"
+         (click)="selectColor('#FFE4E1')"></div>
+    <div class="ui-g-12 back-dark" style="height: 40px;;cursor: pointer"
+         (click)="selectColor('')"></div>
+  </div>
+  <div class="change-font" *ngIf="selectFontFamily" (mouseleave)="selectFontFamily = false">
+    <div class="ui-g-12 change-font-content" style="background-color: #FFFAFA;font-family: cursive"
+         (click)="selectFont('cursive')">书</div>
+    <div class="ui-g-12 change-font-content" style="background-color: #EEEED1;font-family: fantasy"
+         (click)="selectFont('fantasy')">书</div>
+    <div class="ui-g-12 change-font-content" style="background-color: #c6dfb0;font-family: monospace"
+         (click)="selectFont('monospace')">书</div>
+  </div>
 </div>
 

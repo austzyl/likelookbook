@@ -20,13 +20,14 @@ export class UserComponent implements OnInit, AfterViewInit {
     page: 0,
     size: 10,
     userName: ''
-  }
+  };
 
   constructor(
     private userService: UserService,
     private el: ElementRef,
     private renderer2: Renderer2
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.userList();
@@ -37,12 +38,13 @@ export class UserComponent implements OnInit, AfterViewInit {
       console.log('用户列表', res);
       if (res['success'] === 'true') {
         this.users = res['data'];
+        this.totalRecords = res['total'];
       }
     });
   }
 
   pageChange(e) {
-    this.params.page = e.first;
+    this.params.page = e.first / this.params.size;
     this.first = e.first;
     this.userList();
   }
@@ -61,6 +63,7 @@ export class UserComponent implements OnInit, AfterViewInit {
     this.params.userName = '';
     this.userList();
   }
+
   ngAfterViewInit() {
     // 修改表格高度撑开页面
     this.scrollHeight = (document.documentElement.clientHeight - 240) + 'px';

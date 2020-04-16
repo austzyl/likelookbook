@@ -42,5 +42,4 @@ export class UserService {
   isManager() {
     return true === this.sessionStorageService.getAuth('ism');
   }
-
 }

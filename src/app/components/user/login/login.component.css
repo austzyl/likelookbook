@@ -305,7 +305,6 @@ ul {
 
 body {
   /* position: relative;*/
-  background: url('../../../../assets/img/b1.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -329,6 +328,7 @@ h1.header-w3ls {
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
+  height: 100%;
   -webkit-justify-content: space-between;
   justify-content: space-between;
 }
@@ -337,6 +337,8 @@ h1.header-w3ls {
   flex-basis: 50%;
   -webkit-flex-basis: 50%;
   box-sizing: border-box;
+  padding: 115px 0px !important;
+  margin: 0 auto;
 }
 
 .art-left-w3ls {
@@ -354,6 +356,12 @@ h1.header-w3ls {
   width: 100%;
   color: #000;
   outline: none;
+  border: none;
+  height: 40px;
+  padding: 8px;
+  margin: 0px 0px 30px;
+  outline: 0;
+  font-size: 16px;
   border: none;
   border-bottom: #00a1ff 2px solid;
   -webkit-appearance: none;
@@ -386,6 +394,7 @@ h1.header-w3ls {
 
 .art-right-w3ls h2 {
   font-weight: 500;
+  font-size: 30px;
   color: #ffffff;
 }
 
@@ -540,7 +549,8 @@ input.checked {
     margin: 0px 0px 30px;
   }
   .art-right-w3ls {
-    padding: 115px 0px !important;
+    justify-self: center;
+    align-self: center;
     margin: 0 auto;
   }
   .art-left-w3ls {
