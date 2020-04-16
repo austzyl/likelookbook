@@ -32,7 +32,7 @@ export class ShelfComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('$', $);
+    // console.log('$', $);
     this.params.userId = this.sessionStorageService.getAuth('userId');
     if (!this.params.userId) {
       this.router.navigate(['/user/login']);
@@ -51,11 +51,11 @@ export class ShelfComponent implements OnInit {
    */
   getShelfBooks() {
     this.bookService.getShelfBooks(this.params).subscribe(res => {
-      console.log('获取用户书架', res);
+      // console.log('获取用户书架', res);
       if (res['success'] === 'true') {
         this.books = res['data'];
         this.pages = Math.ceil(res['total'] / 10);
-        console.log('aaaa', this.pages);
+        // console.log('aaaa', this.pages);
       } else {
         this.message = [{severity: 'error', summary: res['message'] ? res['message'] : '请求失败！'}];
       }
@@ -63,10 +63,10 @@ export class ShelfComponent implements OnInit {
   }
 
   remove(userId, bookId) {
-    console.log('userID', userId);
-    console.log('bookId', bookId);
+    // console.log('userID', userId);
+    // console.log('bookId', bookId);
     this.bookService.removeFromShelf(userId, bookId).subscribe(res => {
-      console.log('移除书架返回', res);
+      // console.log('移除书架返回', res);
       if (res['success'] === 'true') {
         this.params.page = 0;
         this.getShelfBooks();
@@ -82,7 +82,7 @@ export class ShelfComponent implements OnInit {
       return;
     }
     this.params.page -= 1;
-    console.log('this.params:', this.params);
+    // console.log('this.params:', this.params);
     this.getShelfBooks();
   }
 
@@ -91,7 +91,7 @@ export class ShelfComponent implements OnInit {
       return;
     }
     this.params.page += 1;
-    console.log('this.params:', this.params);
+    // console.log('this.params:', this.params);
     this.getShelfBooks();
   }
 }

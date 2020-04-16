@@ -33,6 +33,6 @@ export class CommonCategoryComponent implements OnInit {
   }
 
   more(id) {
-    console.log('more book');
+    // console.log('more book');
   }
 }

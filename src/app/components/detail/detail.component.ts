@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewRef} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Params, Router} from '@angular/router';
 import {BookService} from '../../common/services/book.service';
 import {EventManager} from '@angular/platform-browser';
@@ -40,6 +40,8 @@ export class DetailComponent implements OnInit {
   selectFontFamily = false;
   backGroundImage = false;
 
+  showTip = true;
+
   constructor(private routeInfo: ActivatedRoute,
               private eventManager: EventManager,
               private sessionStorageService: SessionStorageService,
@@ -50,8 +52,10 @@ export class DetailComponent implements OnInit {
   ngOnInit() {
 
     this.getParams();
-    console.log('routeInfo', this.routeInfo);
-
+    // console.log('routeInfo', this.routeInfo);
+    setTimeout(() => {
+      this.showTip = false;
+    }, 20000);
     /*const tsthis = this;
     /!** This is high-level function.
      * It must react to delta being more/less than zero.
@@ -61,11 +65,11 @@ export class DetailComponent implements OnInit {
       if (delta < 0) {
         // alert("鼠标滑轮向下滚动：" + delta + "次！"); // 1
         tsthis.changePage('0');
-        console.log('aaaaaaaaaaaa', delta);
+        // console.log('aaaaaaaaaaaa', delta);
         return;
       } else {
         // alert("鼠标滑轮向上滚动：" + delta + "次！"); // -1
-        console.log('bbbbbbbbbbbbb', delta);
+        // console.log('bbbbbbbbbbbbb', delta);
         tsthis.changePage('1');
         return;
       }
@@ -139,14 +143,14 @@ export class DetailComponent implements OnInit {
 
   getContent() {
     this.bookService.getContent(this.params).subscribe(data => {
-      console.log('getContent', data);
+      // console.log('getContent', data);
       if (data['success'] === 'true') {
         this.leftOrRightListener();
         this.nextPageContent = data['data']['sw1'];
         if (!this.nextPageContent) {
           this.params.currentPage = 0;
         }
-        console.log('this.currentPage:', this.params.currentPage);
+        // console.log('this.currentPage:', this.params.currentPage);
         // this.nextPageContent = data['data']['sw2'];
       }
     });
@@ -180,7 +184,7 @@ export class DetailComponent implements OnInit {
     this.params.startLine = this.params.currentPage * this.params.bytesCount - 1;
     this.params.endLine = this.params.currentPage * this.params.bytesCount + this.params.bytesCount;
     this.bookService.getContent(this.params).subscribe(data => {
-      console.log('data', data);
+      // console.log('data', data);
       if (data['success'] === 'true') {
         // data.data为null时候，读取到最后一页
         if (data['data'] === null || !data['data']['sw1']) {

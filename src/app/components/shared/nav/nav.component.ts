@@ -48,7 +48,7 @@ export class NavComponent implements OnInit {
       return;
     }
     this.userService.logout({userId: this.sessionStorageService.getAuth('userId')}).subscribe(res => {
-      console.log('logout:', res);
+      // console.log('logout:', res);
       if (res['success'] === 'true') {
         this.sessionStorageService.clearAuth();
         this.isLogin = false;

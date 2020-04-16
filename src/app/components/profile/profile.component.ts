@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.routeInfo.params.subscribe((params: Params) => {
       this.bookId = params['id'];
       this.bookService.getOne(this.bookId).subscribe(item => {
-        console.log('item', item);
+        // console.log('item', item);
         this.item = item['data'];
         if (this.item.bookImageFileString) {
           this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' +  this.item.bookImageFileString);
@@ -43,14 +43,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
    * @param e 事件对象
    */
   rate(event) {
-    console.log('event', event.value);
+    // console.log('event', event.value);
   }
 
   /**
    * TODO 提交评论
    */
   commitComment() {
-    console.log('提交评论：');
+    // console.log('提交评论：');
   }
 
   /**
@@ -94,7 +94,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
    *
    */
   scrollDiv(event) {
-    console.log('event', event);
+    // console.log('event', event);
     const goTopBtn = document.getElementById('returnToTop');
     if (goTopBtn) {
       // 获取目标滚动条相对顶部位置

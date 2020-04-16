@@ -1,1 +1,39 @@
 
+.app-tip {
+  width: 207px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+}
+
+.app-animate {
+  padding-left: 20px;
+  font-size: 16px;
+  color: #844d09;
+  display: inline-block;
+  white-space: nowrap;
+  -webkit-animation: 10s wordsLoop linear infinite normal;
+  animation: 10s wordsLoop linear infinite normal;
+}
+
+@keyframes wordsLoop {
+  0% {
+    transform: translateX(200px);
+    -webkit-transform: translateX(200px);
+  }
+  100% {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+  }
+}
+
+@-webkit-keyframes wordsLoop {
+  0% {
+    transform: translateX(200px);
+    -webkit-transform: translateX(200px);
+  }
+  100% {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+  }
+}

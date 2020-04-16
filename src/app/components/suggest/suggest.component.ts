@@ -37,8 +37,9 @@ export class SuggestComponent implements OnInit {
           return;
         } else {
           this.suggestService.save({userId: this.userId, userSuggest: this.content}).subscribe(data => {
-            console.log('保存建议：', data);
             this.message = [{severity: 'info', summary: '提交成功，感谢您的反馈！'}];
+            this.content = '';
+            this.getUserSuggestCount();
           });
         }
 

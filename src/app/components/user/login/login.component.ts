@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log('questionO', this.questionsOne);
+    // console.log('questionO', this.questionsOne);
     if (this.sessionStorageService.getAuth('isa')) {
       this.router.navigate(['/']);
     }
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
    */
   login() {
     this.userService.login({userName: this.userName, pwd: Md5.hashStr(this.pwd)}).subscribe(res => {
-      console.log('login-result:', res);
+      // console.log('login-result:', res);
       if (res['success'] === 'true') {
         const auth = {
           isa: true,
@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.user.password = Md5.hashStr(this.registerPassword);
     this.userService.register(this.user).subscribe(res => {
-      console.log('register result：', res);
+      // console.log('register result：', res);
       if (res['success'] === 'true') {
         this.message = [{severity: 'info', summary: '注册成功！'}];
         this.showRegister = false;
@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
     this.forgotUser.password = Md5.hashStr(this.forgotRegisterPassword);
     this.userService.forgotPassword(this.forgotUser).subscribe(res => {
-      console.log('忘记密码', res);
+      // console.log('忘记密码', res);
       if (res['success'] === 'true') {
         this.showForgotPassword = false;
         this.forgotRegisterPassword = '';

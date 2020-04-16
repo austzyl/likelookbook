@@ -48,7 +48,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   getTree() {
     if (sessionStorage.getItem('cateTree')) {
       this.cateTree = JSON.parse(sessionStorage.getItem('cateTree'));
-      console.log('this.cateTree1', this.cateTree);
+      // console.log('this.cateTree1', this.cateTree);
       this.handleSelectTree();
       this.loading = false;
       return;
@@ -58,7 +58,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
       this.loading = false;
       if (data['success'] === 'true') {
         this.cateTree = data['data'];
-        console.log('this.cateTree2', this.cateTree);
+        // console.log('this.cateTree2', this.cateTree);
         this.handleSelectTree();
         sessionStorage.setItem('cateTree', JSON.stringify(this.cateTree));
       }
@@ -82,7 +82,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
    * @param node 当前节点
    */
   nodeSelect(node) {
-    console.log('node:', node);
+    // console.log('node:', node);
     node.node.expanded = !node.node.expanded;
     this.param.cateCode = node.node.type;
     this.param.page = 0;
@@ -93,9 +93,9 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
    * 根据条件查询书籍
    */
   queryBooks() {
-    console.log('querybooks', '查询书籍');
+    // console.log('querybooks', '查询书籍');
     this.bookService.getBookManagerList(this.param).subscribe((data) => {
-      console.log('data', data);
+      // console.log('data', data);
       this.books = data['data'];
       this.total = data['total'];
     });
@@ -109,7 +109,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
    * @param e 事件对象
    */
   paginate(e) {
-    console.log('e', e);
+    // console.log('e', e);
     this.param.page = e.page;
     this.queryBooks();
   }

@@ -27,7 +27,7 @@ export class AdviseComponent implements OnInit {
 
   advise() {
     this.adviseService.saveAdvise(this.item).subscribe(res => {
-      console.log('res:', res);
+      // console.log('res:', res);
     });
   }
 }

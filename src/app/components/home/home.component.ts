@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
    * @param event 事件对象
    */
   clickImage(event) {
-    console.log('event:', event);
+    // console.log('event:', event);
     this.router.navigate(['/profile', this.scrollBooks[event.index].id]);
   }
 
@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
    */
   getCateBooks() {
     this.bookService.books().subscribe(data => {
-      console.log('d', data);
+      // console.log('d', data);
       this.items = data['data'];
       this.cateNames = data['message'].split(',');
       this.cateCodes = data['extend'].split(',');
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
    */
   getCategories() {
     this.cateService.categories('0', 0, 9).subscribe(data => {
-      console.log('data', data);
+      // console.log('data', data);
       if (data['success'] === 'true') {
         this.categories = data['data'];
       }
@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
   getRecommends() {
     this.bookService.getBooksRankings().subscribe(data => {
 
-      console.log('recommends datas:', data);
+      // console.log('recommends datas:', data);
       if (data['success'] === 'true') {
         this.recommends = data['data'];
       }

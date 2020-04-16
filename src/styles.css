@@ -144,7 +144,20 @@ body .custom-label-parent .ui-menubar {
 body .ui-menubar .ui-menubar-root-list > .ui-menuitem > .ui-menuitem-link {
   padding: 4px 22px !important;
 }
-
+body .custom-ui .ui-button {
+  background-color: #826920 ;
+  border: 1px solid #e7e47f;
+}body .custom-ui .profile-button .ui-button {
+   font-size: 20px;
+   border-radius: 36px 0px;
+}
+body .custom-ui .ui-button:enabled:hover {
+  background-color: #be9437;
+  border-color: #bfaa11;
+}
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+  background-color: #937c5f !important;
+}
 body .ui-panel .ui-panel-titlebar {
   border: 0px !important;
   background-color: #e7e7e7 !important;

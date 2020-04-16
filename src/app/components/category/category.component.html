@@ -15,7 +15,7 @@
   <div style="float: right;height: 100%;width: 1000px;background-color: floralwhite">
     <!--内容区-->
     <div class="ui-g" style="border-bottom: 1px solid #7080670f ">
-      <div class="ui-g-12">
+      <div class="ui-g-12 custom-ui">
         <div class="ui-inputgroup" style="width: 400px;float: right;padding-top: 15px;">
           <input type="text" (keydown)="onEnterPress($event)"  pInputText placeholder="作品名称" [(ngModel)]="param.bookName"  style="width: 300px;position:relative;left: 24px">
           <span  (click)="param.bookName='';selectedTree=null;param.cateCode=''" class="input-clear">X</span>

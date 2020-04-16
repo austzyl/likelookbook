@@ -32,10 +32,10 @@ export class AddEditBookComponent implements OnInit {
     this.cateTree = JSON.parse(sessionStorage.getItem('cateTree'));
     if (this.bookItem) {
       this.addOrEditTitle = '编辑';
-      console.log('this.bookItem:', this.bookItem);
+      // console.log('this.bookItem:', this.bookItem);
     } else {
       this.bookItem = BookItem.newInstance();
-      console.log('this.bookItem:', this.bookItem);
+      // console.log('this.bookItem:', this.bookItem);
     }
   }
 
@@ -49,7 +49,7 @@ export class AddEditBookComponent implements OnInit {
 
   save() {
    /* this.bookService.save(this.bookItem).subscribe(data => {
-      console.log('save response:', data);
+      // console.log('save response:', data);
       this.eventData.save = true;
       this.closeAddOrEditDialog();
     });*/
@@ -97,11 +97,11 @@ export class AddEditBookComponent implements OnInit {
   }
 
   uploadImage(e) {
-    console.log('uploadEvent:', e);
+    // console.log('uploadEvent:', e);
   }
 
   myUploader(e) {
-    console.log('自定义上传', e);
+    // console.log('自定义上传', e);
     const file = e.files[0];
     this.bookItem['bookImageFileName'] = file.name;
 

@@ -32,7 +32,7 @@ export class CategoryManagerComponent implements OnInit, AfterViewInit  {
   }
 
   addOrEditCategory(selectedCategoryNode, isAdd) {
-    console.log('selectedCategoryNode:', selectedCategoryNode);
+    // console.log('selectedCategoryNode:', selectedCategoryNode);
     const type = selectedCategoryNode.type;
     // 到三级分类后不可新增子分类
     if (isAdd && type.substring(type.indexOf('_'), type.length).length === 5) {
@@ -58,13 +58,13 @@ export class CategoryManagerComponent implements OnInit, AfterViewInit  {
    */
   getCategories() {
     this.categoryService.categoryTree('0').subscribe((data) => {
-      console.log('date', data);
+      // console.log('date', data);
       this.categories = data['data'];
       sessionStorage.setItem('cateTree', JSON.stringify(this.categories));
     });
   }
   closeListener(event) {
-    console.log('e', event);
+    // console.log('e', event);
     this.showAddOrEditDialog = false;
     if (event.save) {
       this.getCategories();
@@ -72,7 +72,7 @@ export class CategoryManagerComponent implements OnInit, AfterViewInit  {
   }
   deleteCategories(selectedCategoryNode) {
     this.categoryService.delete([selectedCategoryNode.data['id']]).subscribe((data) => {
-      console.log('data', data);
+      // console.log('data', data);
       if (data['success'] === 'true') {
         this.getCategories();
       }

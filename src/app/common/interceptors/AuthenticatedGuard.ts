@@ -9,7 +9,7 @@ export class AuthenticatedGuard implements CanActivate {
 
   canActivate() {
     if (!this.userService.isAuthenticated()) {
-      console.log('用户未登录');
+      // console.log('用户未登录');
       this.router.navigateByUrl('/sys/login');
       return false;
     } else {

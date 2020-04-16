@@ -53,7 +53,7 @@ export class AddEditCategoryComponent implements OnInit {
       this.addOrEditTitle = '编辑';
       this.editCategory = this.category;
     }
-    console.log('category:', this.category);
+    // console.log('category:', this.category);
   }
 
   closeAddOrEditDialog() {
@@ -62,7 +62,7 @@ export class AddEditCategoryComponent implements OnInit {
 
   save() {
     this.categoryService.save(this.editCategory, this.category.id).subscribe((data) => {
-      console.log('data', data);
+      // console.log('data', data);
       if (data['success'] === 'true') {
         this.eventData.save = true;
         this.closeAddOrEditDialog();

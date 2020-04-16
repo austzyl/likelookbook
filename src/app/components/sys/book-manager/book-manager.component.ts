@@ -44,16 +44,16 @@ export class BookManagerComponent implements OnInit, AfterViewInit {
   }
 
   queryBooks() {
-    console.log('querybooks', '查询书籍');
-    console.log('selectedBook', this.selectedBook);
+    // console.log('querybooks', '查询书籍');
+    // console.log('selectedBook', this.selectedBook);
     this.bookService.getBookManagerList(this.param).subscribe((data) => {
-      console.log('data', data);
+      // console.log('data', data);
       this.books = data['data'];
       this.totalRecords = data['total'];
     });
   }
   pageChange(e) {
-    console.log('e', e);
+    // console.log('e', e);
     this.param.page = e.first / this.param.size;
     this.first = e.first;
     this.queryBooks();
@@ -76,7 +76,7 @@ export class BookManagerComponent implements OnInit, AfterViewInit {
   }
 
   nodeSelect(node) {
-    console.log('node:', node);
+    // console.log('node:', node);
     node.node.expanded = !node.node.expanded;
     this.param.cateCode = node.node.type;
     this.param.page = 0;
@@ -101,12 +101,12 @@ export class BookManagerComponent implements OnInit, AfterViewInit {
    */
   batchSave() {
     if (this.selectedTree && this.selectedTree.leaf) {
-      console.log('this.selectTree:', this.selectedTree);
+      // console.log('this.selectTree:', this.selectedTree);
       this.bookService.batchSave({
         cateDir: this.selectedTree.data.cateDir,
         cateId: this.selectedTree.data.id
       }).subscribe(data => {
-        console.log('batchSave-data:', data);
+        // console.log('batchSave-data:', data);
         this.queryBooks();
       });
     }
@@ -117,14 +117,14 @@ export class BookManagerComponent implements OnInit, AfterViewInit {
       alert('请选择需要删除的数据！');
       return;
     }
-    console.log('this.selectBooks:', this.selectedBook);
+    // console.log('this.selectBooks:', this.selectedBook);
     let ids = '';
     this.selectedBook.map(item => {
       ids += item.id + ',';
     });
     ids = ids.substring(0, ids.length - 1);
     this.bookService.delete(ids).subscribe(data => {
-      console.log('delete-data:', data);
+      // console.log('delete-data:', data);
       if (data['success'] === 'true') {
         this.queryBooks();
       }

@@ -35,7 +35,7 @@ export class UserComponent implements OnInit, AfterViewInit {
 
   userList() {
     this.userService.queryUsers(this.params).subscribe(res => {
-      console.log('用户列表', res);
+      // console.log('用户列表', res);
       if (res['success'] === 'true') {
         this.users = res['data'];
         this.totalRecords = res['total'];

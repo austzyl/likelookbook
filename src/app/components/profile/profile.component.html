@@ -1,5 +1,5 @@
 <p-growl [(value)]="message" life="2000"></p-growl>
-<div id="profile_view" style="background-color: #ffffff;height: 100%;" (scroll)="scrollDiv($event)">
+<div id="profile_view" class="custom-ui" style="background-color: #ffffff;height: 100%;" (scroll)="scrollDiv($event)">
   <div class="ui-g">
     <div class="ui-g-12">
       <div class="ui-g-1"></div>
@@ -24,7 +24,7 @@
 
         </div>
         <div class="ui-g-12" style="padding-left: 17px;">简介：{{item.bookDesc?item.bookDesc:'无'}}</div>
-        <div class="ui-g-12"  style="padding-left: 17px;">
+        <div class="ui-g-12 profile-button"  style="padding-left: 17px;">
           <button [disabled]="false" type="button"
                   pButton [routerLink]="['/detail',item.bookDir,item.id]"
                   label="免费阅读" style="margin-top: 35px">
