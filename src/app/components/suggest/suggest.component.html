@@ -1,0 +1,15 @@
+<p-growl [(value)]="message" life="2000"></p-growl>
+<div class="header">
+  <app-nav></app-nav>
+</div>
+<div class="ui-g">
+  <div class="ui-g-12" style="color: #c1c99e;font-size: large;margin-top: 20px;">
+    感谢您注册本站，为了提供更好的阅读体验，希望您能提供宝贵的意见，帮助本站一起改进。
+  </div>
+  <div class="ui-g-12">
+    <textarea name="content" class="custom-placeholder" placeholder="建议内容长度10-500字内,您已提交建议{{count}}次"  id="content" rows="8" [(ngModel)]="content" style="width: 100%;padding: 5px;"></textarea>
+  </div>
+  <div class="ui-g-12">
+    <button [disabled]="count > 2" style="float: right;" type="button" pButton icon="fa fa-save" (click)="save()" label="提交"></button>
+  </div>
+</div>
