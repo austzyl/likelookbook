@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SessionStorageService} from '../../common/services/session-storage.service';
 import {Router} from '@angular/router';
 import {SuggestService} from '../../common/services/suggest.service';
+import {SUGGEST_COLS} from '../../common/enties/Const';
 
 @Component({
   selector: 'app-suggest',
@@ -13,6 +14,9 @@ export class SuggestComponent implements OnInit {
   content = '';
   userId;
   count = 0;
+  showViewSuggest = false;
+  cols = SUGGEST_COLS;
+  userSuggests: any[] = [];
   constructor(private sessionStorageService: SessionStorageService,
               private suggestService: SuggestService,
               private router: Router) { }
@@ -37,7 +41,7 @@ export class SuggestComponent implements OnInit {
           return;
         } else {
           this.suggestService.save({userId: this.userId, userSuggest: this.content}).subscribe(data => {
-            this.message = [{severity: 'info', summary: '提交成功，感谢您的反馈！'}];
+            this.message = [{severity: 'info', summary: '提交成功，我们会通过邮箱回复你的反馈，感谢您的支持！'}];
             this.content = '';
             this.getUserSuggestCount();
           });
@@ -58,4 +62,19 @@ export class SuggestComponent implements OnInit {
       }
     });
   }
+
+  viewSuggest() {
+    this.showViewSuggest = true;
+    this.suggestService.getUserSuggests(this.userId).subscribe(res => {
+      if (res['success'] === 'true') {
+        this.userSuggests = res['data'];
+      }
+    });
+  }
+
+  closeViewSuggest(e) {
+    this.showViewSuggest = false;
+  }
+
+
 }

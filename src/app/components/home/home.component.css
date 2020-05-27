@@ -2,7 +2,7 @@
 .app-tip {
   width: 207px;
   overflow: hidden;
-  position: fixed;
+  position: absolute;
   top: 0;
 }
 

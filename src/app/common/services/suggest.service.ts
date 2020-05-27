@@ -18,4 +18,9 @@ export class SuggestService {
     const url = '/yunqi/suggest/count?userId=' + id;
     return this.http.get(url, {});
   }
+
+  getUserSuggests(id) {
+    const url = `/yunqi/suggest/list/${id}`;
+    return this.http.get(url);
+  }
 }

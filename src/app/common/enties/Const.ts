@@ -21,3 +21,9 @@ export const USER_COLS = [
   {header: '创建时间', field: 'userCreateTime'}
 ];
 
+export const SUGGEST_COLS = [
+  {header: '反馈内容', field: 'userSuggest'},
+  {header: '反馈时间', field: 'userSuggestDate'},
+  {header: '回复', field: 'userSuggestReply'}
+];
+

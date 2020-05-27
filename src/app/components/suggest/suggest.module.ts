@@ -6,6 +6,8 @@ import {GrowlModule} from 'primeng/growl';
 import {NavModule} from '../shared/nav/nav.component';
 import {FormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
+import {TableModule} from 'primeng/table';
 
 export const ROUTES = [
   {
@@ -21,7 +23,9 @@ export const ROUTES = [
     RouterModule.forChild(ROUTES),
     GrowlModule,
     NavModule,
-    ButtonModule
+    ButtonModule,
+    DialogModule,
+    TableModule
 
   ],
   declarations: [SuggestComponent]
