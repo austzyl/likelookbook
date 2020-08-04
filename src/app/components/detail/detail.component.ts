@@ -52,6 +52,7 @@ export class DetailComponent implements OnInit {
   ngOnInit() {
 
     this.getParams();
+    this.leftOrRightListener();
     // console.log('routeInfo', this.routeInfo);
     setTimeout(() => {
       this.showTip = false;
@@ -145,7 +146,7 @@ export class DetailComponent implements OnInit {
     this.bookService.getContent(this.params).subscribe(data => {
       // console.log('getContent', data);
       if (data['success'] === 'true') {
-        this.leftOrRightListener();
+
         this.nextPageContent = data['data']['sw1'];
         if (!this.nextPageContent) {
           this.params.currentPage = 0;
@@ -169,6 +170,7 @@ export class DetailComponent implements OnInit {
   }
 
   changePage(flag) {
+    console.log('aa');
     if (flag === '0') {
       if (this.params.currentPage > 0) {
         this.params.currentPage--;
