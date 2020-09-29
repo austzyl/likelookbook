@@ -12,8 +12,8 @@
   color: #844d09;
   display: inline-block;
   white-space: nowrap;
-  -webkit-animation: 10s wordsLoop linear infinite normal;
-  animation: 10s wordsLoop linear infinite normal;
+  -webkit-animation: 20s wordsLoop linear infinite normal;
+  animation: 20s wordsLoop linear infinite normal;
 }
 
 @keyframes wordsLoop {
